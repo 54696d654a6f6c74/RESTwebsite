@@ -1,0 +1,76 @@
+/* https://colorhunt.co/palette/144399 */
+
+/*
+    Primary - #222831
+    Secound - #393e46
+    Accent  - #d65a31
+    Text    - eeeeee
+*/
+
+body{
+    font-family: sans-serif;
+    background-color: #222831;
+    color: #eeeeee;
+    display: block;
+}
+
+nav{
+    display: block;
+    background-color: #393e46;
+    box-shadow: 2px 2px 5px #000000;
+}
+
+nav .nav-item:hover{
+    background-color: #d65a61;
+}
+
+.menu .menu-item:hover{
+    background-color: #d65a61;
+}
+
+.nav-container
+{
+    display: inline-block;
+    padding-block: 12px;
+}
+
+.nav-item{
+    text-align: center;
+    text-decoration: none;
+    color: #eeeeee;
+    padding: 12px;
+    font-size: 1.2em;
+}
+
+#home-page-main{
+    display: flex;
+}
+
+.menu{
+    display: block;
+    position: fixed;
+    min-width: 30%;
+    width: 30%;
+    min-height: 100%;
+    height: 100%;
+    right: 0;
+    bottom: 25%;
+    top: 25%;
+}
+
+.menu-item{
+    text-align: left;
+    padding: .75vh;
+    font-size: 2.5vw;
+    color: #eeeeee;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+article{
+    display: block;
+    width: 70%;
+    max-width: 70%;
+    word-wrap: break-word;
+}
