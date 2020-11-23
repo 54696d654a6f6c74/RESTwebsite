@@ -7,7 +7,7 @@ CORS(app)
 
 @app.route('/contacts', methods=['GET'])
 def get_contacts():
-    ret = open('contact.json').read()
+    ret = open("data/contact.json", "r").read()
     return ret
 
 app.run()
