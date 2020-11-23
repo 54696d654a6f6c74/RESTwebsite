@@ -11,7 +11,7 @@ function displayContacts(contacts)
     for(let i = 0; i < contacts.length; i++)
     {
         document.getElementById("contacts").innerHTML += "<p> Име: " + contacts[i].name + "</p>";
-        document.getElementById("contacts").innerHTML += "<p> Номер: " + contacts[i].number + "</p>";
+        document.getElementById("contacts").innerHTML += "<p> Номер: " + contacts[i].number + "</p><hr>";
     }
 }
 
