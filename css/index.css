@@ -84,13 +84,14 @@ article{
     background-color: #393e46;
 }
 
-#news-item{
+.news-item{
     text-decoration: none;
     color: #eeeeee;
-    padding: 10px;
+    padding-block: 10px;
+    padding-left: 20px;
 }
 
-#news-item:hover{
+.news-item:hover{
     background-color: #d65a61;
     cursor: pointer;
     box-shadow: 2px 2px 5px #000000;
