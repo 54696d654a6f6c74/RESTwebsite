@@ -18,6 +18,7 @@ nav{
     display: block;
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
+    text-shadow: 0.5px 0.5px 1px #222831;
 }
 
 nav .nav-item:hover{
@@ -26,6 +27,8 @@ nav .nav-item:hover{
 
 .menu .menu-item:hover{
     background-color: #d65a61;
+    text-shadow: 0.5px 0.5px 1px #222831;
+    box-shadow: 1px 1px 2px #000000;
 }
 
 .nav-container
@@ -73,4 +76,23 @@ article{
     width: 70%;
     max-width: 70%;
     word-wrap: break-word;
+}
+
+#news-page{
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #393e46;
+}
+
+#news-item{
+    text-decoration: none;
+    color: #eeeeee;
+    padding: 10px;
+}
+
+#news-item:hover{
+    background-color: #d65a61;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #000000;
+    text-shadow: 0.5px 0.5px 1px #222831;
 }
