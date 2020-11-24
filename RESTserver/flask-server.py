@@ -7,7 +7,10 @@ CORS(app)
 
 @app.route('/contacts', methods=['GET'])
 def get_contacts():
-    ret = open("data/contact.json", "r").read()
-    return ret
+    return open("data/contact.json", "r").read()
+
+@app.route('/news/<id>', methods=['GET'])
+def get_news_article(id):
+    return open("data/news/{}.json".format(id), "r").read()    
 
 app.run()

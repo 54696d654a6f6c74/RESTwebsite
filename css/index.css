@@ -25,6 +25,11 @@ nav .nav-item:hover{
     background-color: #d65a61;
 }
 
+a{
+    color: #eeeeee;
+    text-decoration: none;
+}
+
 .menu .menu-item:hover{
     background-color: #d65a61;
     text-shadow: 0.5px 0.5px 1px #222831;
@@ -78,20 +83,20 @@ article{
     word-wrap: break-word;
 }
 
-#news-page{
+#news-main-page{
     margin-top: 20px;
     padding: 5px;
     background-color: #393e46;
 }
 
-.news-item{
+.news-main-item{
     text-decoration: none;
     color: #eeeeee;
     padding-block: 10px;
     padding-left: 20px;
 }
 
-.news-item:hover{
+.news-main-item:hover{
     background-color: #d65a61;
     cursor: pointer;
     box-shadow: 2px 2px 5px #000000;

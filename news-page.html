@@ -5,6 +5,7 @@
 
         <link rel="stylesheet" href="./css/index.css" />
 
+        <script defer type="module" src="./js/news-page.js"></script>
     </head>
     <body>
         <nav>
@@ -18,25 +19,9 @@
             </div>
         </nav>
 
-        <div id="news-page-main">
+        <div id="news-content">
 
-            <a onclick="selected(1)" href="news-page.html">
-                <h2 class="news-main-item">Заглавие</h2>
-            </a>
-            <a onclick="selected(2)" href="news-page.html">
-                <h2 class="news-main-item">Заглавие</h2>
-            </a>
-            <a onclick="selected(3)" href="news-page.html">
-                <h2 class="news-main-item">Заглавие</h2>
-            </a>
-            
-        </div >
-
-        <script>
-            function selected(val){
-                localStorage["selectedNews"] = val;
-            }
-        </script>
+        </div>
 
         <div class="menu">
                 <a class="menu-item" href="#">Дневник</a>
@@ -49,4 +34,4 @@
             </div>
 
     </body>
-</html>
+</html
