@@ -1,15 +1,21 @@
 import * as utils from './utils.js';
 
-async function getNews()
+async function getNewsPart(part)
 {
     // A validation step could be done before returning
-    return await utils.httpGet("news/" + localStorage["selectedNews"]);
+    return await utils.httpGet("news/" + localStorage["selectedNews"] + "/" + part);
 }
 
-function displayNewsArticle(content)
+function displayNewsHeader(header)
 {
-    document.getElementById("news-content").innerHTML += "<h2>" + content.title + "</h2>";    
+    document.getElementById("news-content").innerHTML += "<h2>" + header.title + "</h2>";
+    document.getElementById("news-content").innerHTML += "<h4>Автор: " + header.author + "</h4>";
+}
+
+function displayNewsContent(content)
+{
     document.getElementById("news-content").innerHTML += "<p>" + content.fill + "</p>";    
 }
 
-getNews().then((content) => displayNewsArticle(content));
+getNewsPart("header").then((header) => displayNewsHeader(header));
+getNewsPart("content").then((content) => displayNewsContent(content));
