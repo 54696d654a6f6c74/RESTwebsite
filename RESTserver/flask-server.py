@@ -19,7 +19,7 @@ def get_news_header(id):
     try:
         file = open('data/news/{}/header.json'.format(id), "r").read()
     except(FileNotFoundError):
-        return flask.abort(404, description="Resource not found")
+        return flask.abort(flask.Response(None))
     
     return file
 

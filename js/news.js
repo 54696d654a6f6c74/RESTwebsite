@@ -4,13 +4,7 @@ import * as utils from './utils.js';
 async function getNewsPart(part, id)
 {
     // A validation step could be done before returning
-    let ret;
-    try{
-        ret = await utils.httpGet("news/" + id + "/" + part);
-        //throw new Error("Your mom");
-    }
-    catch(err){ console.log(err.message)}
-    return ret;
+    return await utils.httpGet("news/" + id + "/" + part);
 }
 
 function writeNewsArticle(id, header)
@@ -21,9 +15,6 @@ function writeNewsArticle(id, header)
     </a>`;
 }
 
-let done = false;
-let i = 1;
-
 async function load()
 {
     let done = false;
@@ -31,8 +22,6 @@ async function load()
     
     while(!done)
     {
-        console.log(i);
-
         let headerInfo = await getNewsPart("header", i);
         
         if(headerInfo == null)
