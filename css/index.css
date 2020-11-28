@@ -1,104 +1,116 @@
+/* Layout is stacked vertically by default (for narrower viewports), so give some breathing room between the sections. */
+/* Visual Style */
 /* https://colorhunt.co/palette/144399 */
-
 /*
     Primary - #222831
     Secound - #393e46
     Accent  - #d65a31
     Text    - eeeeee
 */
-
 body{
     font-family: sans-serif;
     background-color: #222831;
     color: #eeeeee;
     display: block;
 }
-
-nav{
-    display: block;
+.header{
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
-    text-shadow: 0.5px 0.5px 1px #222831;
+    min-height: 40px;
+    position: static;
+    right: 0;
 }
-
-nav .nav-item:hover{
-    background-color: #d65a61;
-}
-
-a{
-    color: #eeeeee;
-    text-decoration: none;
-}
-
-.menu .menu-item:hover{
-    background-color: #d65a61;
-    text-shadow: 0.5px 0.5px 1px #222831;
-    box-shadow: 1px 1px 2px #000000;
-}
-
-.nav-container
-{
-    display: inline-block;
-    padding-block: 12px;
-}
-
-.nav-item{
+#nav-item{
+    float: inline-end;
     text-align: center;
     text-decoration: none;
     color: #eeeeee;
     padding: 12px;
+    /*margin-top: 10px;
+    margin-bottom: 10px;*/
     font-size: 1.2em;
 }
-
-#home-page-main{
-    display: flex;
+#nav-item:hover{
+    background-color: #d65a61;
 }
-
-.menu{
-    display: block;
-    position: fixed;
-    min-width: 30%;
-    width: 30%;
-    min-height: 100%;
-    height: 100%;
-    right: 0;
-    bottom: 25%;
-    top: 25%;
+.menu .menu-item:hover{
+    background-color: #d65a61;
 }
-
 .menu-item{
     text-align: left;
-    padding: .75vh;
-    font-size: 2.5vw;
+    padding: .55vh;
+    font-size: 1.5rem;
+    /*font-size: 1.2em;*/
     color: #eeeeee;
     text-decoration: none;
-    display: block;
     width: 100%;
+    display: inline-block;
+    border-bottom: 2px solid #222831;
+}
+.menu{
+    background-color: #393e46;
+    box-shadow: 2px 2px 5px #000000;
+}
+.menu hr{
+    margin: 0px;
+}
+.container > * {
+    margin-bottom: 10px;
 }
 
-article{
-    display: block;
-    width: 70%;
-    max-width: 70%;
+.footer{
+    background-color: #393e46;
+    box-shadow: 2px 2px 5px #000000;
+}
+/* grid for wider viewports */
+@media screen and (min-width: 501px) {
+    .container > * {
+        margin-bottom: 0;
+    }
+    /* Define the grid */
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-gap: 10px 10px;
+    }
+    /* Place items on the grid */
+    .header,
+    .footer {
+        grid-column: 1 / -1;
+    }
+    .content {
+        grid-column: 2 / 4;
+        right: 40px;
+        position: static;
+        right: 0;
+    }
+    #header-left{
+        float: left;
+    }
+    #header-right{
+        float: right;
+    }
+    .menu{
+        
+        font-size: 1.5vh;
+    }
+}
+
+.container {
+    font-family: Helvetica, Arial, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 95rem;
     word-wrap: break-word;
 }
 
-#news-main-page{
-    margin-top: 20px;
-    padding: 5px;
-    background-color: #393e46;
+.container > * {
+/*
+    background-color: #ccc;
+*/     
+    padding: 1em;
 }
-
-.news-main-item{
-    text-decoration: none;
-    color: #eeeeee;
-    padding-block: 10px;
-    padding-left: 20px;
-}
-
-.news-main-item:hover{
-    background-color: #d65a61;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px #000000;
-    text-shadow: 0.5px 0.5px 1px #222831;
+img {
+    max-width: 100%;
+    height: auto;
 }
