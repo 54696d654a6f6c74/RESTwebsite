@@ -11,24 +11,32 @@ body{
     font-family: sans-serif;
     background-color: #222831;
     color: #eeeeee;
-    display: block;
+    display: block; 
 }
 .header{
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
-    min-height: 40px;
+    min-height: 1.5em;
     position: static;
     right: 0;
+    padding-left: 0.3em;
 }
-#nav-item{
-    float: inline-end;
+#header-left{
+    float: left;
+}
+#header-right{
+    float: right;
+}
+.nav-item{
     text-align: center;
     text-decoration: none;
     color: #eeeeee;
-    padding: 12px;
+    padding: 0.15em;
+    margin-right: 0.3em;
     /*margin-top: 10px;
     margin-bottom: 10px;*/
-    font-size: 1.2em;
+    font-size: 1.5em;
+    line-height: 110%;
 }
 #nav-item:hover{
     background-color: #d65a61;
@@ -39,8 +47,10 @@ body{
 .menu-item{
     text-align: left;
     padding: .55vh;
-    font-size: 1.5rem;
-    /*font-size: 1.2em;*/
+    /*font-size: max(1em, min(4em, 5.333vw));*/
+    /*font-size: 150%;*/
+    line-height: 110%;
+    font-size: 1.5em;
     color: #eeeeee;
     text-decoration: none;
     width: 100%;
@@ -58,12 +68,22 @@ body{
     margin-bottom: 10px;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 110%;
+}
+
 .footer{
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
 }
 /* grid for wider viewports */
-@media screen and (min-width: 501px) {
+@media screen and (min-aspect-ratio: 4/3) and (min-width: 700px) {
     .container > * {
         margin-bottom: 0;
     }
@@ -72,6 +92,7 @@ body{
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         grid-gap: 10px 10px;
+        max-width: 75vw;
     }
     /* Place items on the grid */
     .header,
@@ -84,15 +105,11 @@ body{
         position: static;
         right: 0;
     }
-    #header-left{
-        float: left;
-    }
-    #header-right{
-        float: right;
-    }
     .menu{
-        
-        font-size: 1.5vh;
+        font-size: 70%;
+    }
+    html{
+        font-size: 3vw;
     }
 }
 
@@ -100,7 +117,6 @@ body{
     font-family: Helvetica, Arial, sans-serif;
     margin-left: auto;
     margin-right: auto;
-    max-width: 95rem;
     word-wrap: break-word;
 }
 
@@ -108,9 +124,19 @@ body{
 /*
     background-color: #ccc;
 */     
-    padding: 1em;
+    padding: .5em;
 }
-img {
-    max-width: 100%;
-    height: auto;
-}
+/* Define minimum font size */
+html {
+    font-size: 16px;
+  }
+  @media screen and (min-width: 320px) {
+    html {
+      font-size: calc(18px + 6 * ((100vw - 320px) / 680));
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    html {
+      font-size: 18px;
+    }
+  }
