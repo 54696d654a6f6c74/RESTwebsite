@@ -19,7 +19,8 @@ nav{
     display: block;
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 nav .nav-item:hover{
