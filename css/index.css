@@ -1,71 +1,48 @@
-/* Layout is stacked vertically by default (for narrower viewports), so give some breathing room between the sections. */
-/* Visual Style */
 /* https://colorhunt.co/palette/144399 */
+
 /*
     Primary - #222831
     Secound - #393e46
     Accent  - #d65a31
     Text    - eeeeee
 */
+
 body{
     font-family: sans-serif;
     background-color: #222831;
     color: #eeeeee;
-    display: block; 
+    display: block;
+    margin-top: 20px;
 }
-.header{
+
+nav{
+    display: block;
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
-    min-height: 1.5em;
-    position: static;
-    right: 0;
-    padding-left: 0.3em;
+    padding: 12px;
 }
-#header-left{
-    float: left;
+
+nav .nav-item:hover{
+    background-color: #d65a61;
 }
-#header-right{
-    float: right;
+
+.menu .menu-item:hover{
+    background-color: #d65a61;
+    text-shadow: 0.5px 0.5px 1px #222831;
+    box-shadow: 1px 1px 2px #000000;
 }
+
+.nav-container
+{
+    display: inline-block;
+}
+
 .nav-item{
     text-align: center;
     text-decoration: none;
     color: #eeeeee;
-    padding: 0.15em;
-    margin-right: 0.3em;
-    /*margin-top: 10px;
-    margin-bottom: 10px;*/
+    padding: 12px;
     font-size: 1.5em;
-    line-height: 110%;
-}
-#nav-item:hover{
-    background-color: #d65a61;
-}
-.menu .menu-item:hover{
-    background-color: #d65a61;
-}
-.menu-item{
-    text-align: left;
-    padding: .55vh;
-    /*font-size: max(1em, min(4em, 5.333vw));*/
-    /*font-size: 150%;*/
-    line-height: 110%;
-    font-size: 1.5em;
-    color: #eeeeee;
-    text-decoration: none;
-    width: 100%;
-    display: inline-block;
-    border-bottom: 2px solid #222831;
-}
-.menu{
-    background-color: #393e46;
-    box-shadow: 2px 2px 5px #000000;
-}
-.menu hr{
-    margin: 0px;
-}
-.container > * {
-    margin-bottom: 10px;
 }
 
 img {
@@ -82,49 +59,67 @@ p {
     background-color: #393e46;
     box-shadow: 2px 2px 5px #000000;
 }
-/* grid for wider viewports */
-@media screen and (min-aspect-ratio: 4/3) and (min-width: 700px) {
-    .container > * {
-        margin-bottom: 0;
-    }
-    /* Define the grid */
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        grid-gap: 10px 10px;
-        max-width: 75vw;
-    }
-    /* Place items on the grid */
-    .header,
-    .footer {
-        grid-column: 1 / -1;
-    }
-    .content {
-        grid-column: 2 / 4;
-        right: 40px;
-        position: static;
-        right: 0;
-    }
-    .menu{
-        font-size: 70%;
-    }
-    html{
-        font-size: 3vw;
-    }
+
+#home-page-main{
+    display: flex;
+    flex-flow: row;
 }
 
-.container {
-    font-family: Helvetica, Arial, sans-serif;
-    margin-left: auto;
-    margin-right: auto;
+.menu{
+    flex: 1;
+    order: 2;
+    position: sticky;
+    width: 30%;
+    height: 100%;
+    right: 0;
+    min-width: 300px;
+    bottom: 25%;
+    top: 25%;
+}
+
+.menu-item{
+    text-align: left;
+    padding: .85vh;
+    font-size: 1.5em;
+    color: #eeeeee;
+    text-decoration: none;
+    display: block;
+    border-bottom: 2px solid #393e46;
+}
+
+.wrapper{
+    flex: 2;
+    order: 1;
+}
+
+article{
+    display: block;
     word-wrap: break-word;
 }
-
-.container > * {
-/*
-    background-color: #ccc;
-*/     
-    padding: .5em;
+@media screen and (max-width: 1000px) {
+    #home-page-main{
+        display: flex;
+        flex-flow: column;
+    }
+    .menu{
+        margin-top: 15px;
+        left: 0;
+        position: inherit;
+        width: 100%;
+        order: 1;
+    }
+    .menu-item{
+        text-align: center;
+        
+        font-size: 2em;
+        color: #eeeeee;
+        text-decoration: none;
+        display: block;
+        
+    }
+    .wrapper{
+        order: 2;
+    }
 }
 /* Define minimum font size */
 html {
@@ -137,6 +132,25 @@ html {
   }
   @media screen and (min-width: 1000px) {
     html {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
+
+ #news-main-page{
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #393e46;
+}
+
+.news-main-item{
+    text-decoration: none;
+    color: #eeeeee;
+    padding-block: 10px;
+    padding-left: 20px;
+}
+.news-main-item:hover{
+    background-color: #d65a61;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #000000;
+    text-shadow: 0.5px 0.5px 1px #222831;
+}
