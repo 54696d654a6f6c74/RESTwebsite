@@ -1,6 +1,14 @@
 import flask
 from flask_cors import CORS
 
+import json
+import os
+
+# count the number of news to allow auto indexing
+newsCount = 0
+while os.path.exists("./data/news/" + str(newsCount+1)):
+    newsCount += 1
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
@@ -23,4 +31,27 @@ def get_news_header(id):
     
     return file
 
+@app.route('/news', methods=['POST'])
+def post_news():
+    global newsCount
+    path = "./data/news/" + str(newsCount+1)
+    os.mkdir(path)
+    newsCount += 1
+
+    data = flask.request.get_json()
+
+    header = data['header']
+    content = data['content']    
+
+    # abstract this functionality away
+    file = open(path + "/header.json", "w")
+    file.write(json.dumps(header))
+    file.close()
+
+    file = open(path + "/content.json", "w")
+    file.write(json.dumps(content))
+    file.close()
+    
+    return flask.Response(None)
+    
 app.run()
