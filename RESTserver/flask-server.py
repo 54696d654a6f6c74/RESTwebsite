@@ -3,11 +3,11 @@ from flask_cors import CORS
 
 import json
 import os
+import shutil
 
 # count the number of news to allow auto indexing
-newsCount = 0
-while os.path.exists("./data/news/" + str(newsCount+1)):
-    newsCount += 1
+def indexNews():
+    return os.listdir("./data/news/")
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -16,6 +16,17 @@ CORS(app)
 @app.route('/contacts', methods=['GET'])
 def get_contacts():
     return open("data/contact.json", "r").read()
+
+@app.route('/news/headers', methods=['GET'])
+def get_all_news_headers():
+    headers = []
+    allNews = indexNews()
+    print(allNews)
+    for i in range(len(allNews)):
+        header = open("data/news/{}/header.json".format(allNews[i]), "r")
+        headers.append(header.read())
+        header.close()
+    return json.dumps(headers)
 
 @app.route('/news/<id>/content', methods=['GET'])
 def get_news_article(id):
@@ -33,10 +44,9 @@ def get_news_header(id):
 
 @app.route('/news', methods=['POST'])
 def post_news():
-    global newsCount
-    path = "./data/news/" + str(newsCount+1)
+    allNews = indexNews()
+    path = "./data/news/" + str(allNews[len(allNews)-1])
     os.mkdir(path)
-    newsCount += 1
 
     data = flask.request.get_json()
 
@@ -53,5 +63,15 @@ def post_news():
     file.close()
     
     return flask.Response(None)
+
+@app.route("/news/<id>", methods=['DELETE'])
+def delete_news(id):
+    allNews = indexNews()
+    try:
+        shutil.rmtree("data/news/" + allNews[int(id)])
+    except FileNotFoundError:
+        return flask.abort(404)
+    return flask.Response(200)
+
     
 app.run()
