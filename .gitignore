@@ -1,0 +1,4 @@
+__pycache__
+Client/node_modules
+RESTserver/data
+.vscode/
