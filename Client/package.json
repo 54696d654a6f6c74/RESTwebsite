@@ -2,7 +2,7 @@
   "name": "client",
   "version": "1.0.0",
   "description": "Client for RESTserver",
-  "main": "main.js",
+  "main": "./js/main.js",
   "scripts": {
     "start": "electron ."
   },

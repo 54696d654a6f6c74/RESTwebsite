@@ -10,7 +10,7 @@ async function getNewsPart(part, id)
 function writeNewsArticle(id, header)
 {
     document.getElementById("news-page-main").innerHTML += `
-    <a onclick="selected(${id+1})" href="news-page.html">
+    <a onclick="selected(${id})" href="news-page.html">
         <h2 class="news-main-item">${header}</h2>
     </a>`;
 }

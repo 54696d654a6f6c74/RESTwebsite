@@ -42,10 +42,15 @@ def get_news_header(id):
     
     return file
 
+# os.listdir() does not return folders in a
+# sequential order so a sort() is necessary
+# which will cause problems for big sets of data
 @app.route('/news', methods=['POST'])
 def post_news():
     allNews = indexNews()
-    path = "./data/news/" + str(allNews[len(allNews)-1])
+    print(allNews.sort())
+    print(allNews[0])
+    path = "./data/news/" + str(int(allNews[len(allNews)-1])+1)
     os.mkdir(path)
 
     data = flask.request.get_json()
@@ -73,5 +78,4 @@ def delete_news(id):
         return flask.abort(404)
     return flask.Response(200)
 
-    
 app.run()
