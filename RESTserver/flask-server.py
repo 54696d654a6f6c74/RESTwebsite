@@ -48,9 +48,12 @@ def get_news_header(id):
 @app.route('/news', methods=['POST'])
 def post_news():
     allNews = indexNews()
-    print(allNews.sort())
-    print(allNews[0])
-    path = "./data/news/" + str(int(allNews[len(allNews)-1])+1)
+    
+    path = None
+    if len(allNews) != 0:
+        path = "./data/news/" + str(int(allNews[len(allNews)-1])+1)
+    else: path = "./data/news/1"
+
     os.mkdir(path)
 
     data = flask.request.get_json()
