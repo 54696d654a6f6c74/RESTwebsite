@@ -1,0 +1,87 @@
+/* https://colorhunt.co/palette/144399 */
+
+/*
+    Primary - #222831
+    Secound - #393e46
+    Accent  - #d65a31
+    Text    - eeeeee
+*/
+
+/* Import all other styles */
+@import url("elements/nav.css");
+@import url("elements/menu.css");
+@import url("elements/news.css");
+@import url("components/list.css");
+/* --- */
+
+/* Define minimum font size */
+html {
+    font-size: 16px;
+}
+/* --- */
+
+/* General rule for the design */
+body{
+    font-family: sans-serif;
+    background-color: #222831;
+    color: #eeeeee;
+    display: block;
+    margin-top: 20px;
+} /* flexbox layout rules */
+#main-page{
+    display: flex;
+    flex-flow: row;
+}
+
+/* --- */
+
+/* Miscellanious rules needed for overall nice design */
+a{
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 110%;
+}
+/* Responsive font size */
+@media screen and (min-width: 320px) {
+    html {
+      font-size: calc(18px + 6 * ((100vw - 320px) / 680));
+    }
+}
+@media screen and (min-width: 1000px) {
+    html {
+      font-size: 16px;
+    }
+}
+
+/* Responsive menu */
+@media screen and (max-width: 1000px) {
+    #main-page{
+        display: flex;
+        flex-flow: column;
+    }
+    .menu{
+        margin-top: 15px;
+        left: 0;
+        position: inherit;
+        width: 100%;
+        order: 1;
+    }
+    .list-item{
+        text-align: center;
+        font-size: 2em;
+        color: #eeeeee;
+        text-decoration: none;
+        display: block;
+        
+    }
+    .wrapper{
+        order: 2;
+    }
+}

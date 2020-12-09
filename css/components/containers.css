@@ -1,0 +1,21 @@
+.hor-popout-span{
+    display: block;
+    background-color: #393e46;
+    box-shadow: 2px 2px 5px #000000;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.hor-popout-container
+{
+    display: inline-block;
+}
+.wrapper{
+    word-wrap: break-word;
+    flex: 2;
+    order: 1;
+}
+#news-main-page{
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #393e46;
+}

@@ -16,6 +16,8 @@ function displayNewsContent(content)
 {
     document.getElementById("news-content").innerHTML += "<p>" + content.fill + "</p>";    
 }
-
-getNewsPart("header").then((header) => displayNewsHeader(header));
-getNewsPart("content").then((content) => displayNewsContent(content));
+async function load(){
+    await getNewsPart("header").then((header) => displayNewsHeader(header));
+    await getNewsPart("content").then((content) => displayNewsContent(content));
+}
+load();

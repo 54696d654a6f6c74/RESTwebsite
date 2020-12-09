@@ -1,0 +1,23 @@
+/* navbar design */
+.hor-popout-span{
+    display: block;
+    background-color: #393e46;
+    box-shadow: 2px 2px 5px #000000;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.hor-popout-container
+{
+    display: inline-block;
+}
+
+.hor-popout-item{
+    text-align: center;
+    text-decoration: none;
+    color: #eeeeee;
+    padding: 12px;
+    font-size: 1.5em;
+}
+nav .hor-popout-item:hover{
+    background-color: #d65a61;
+}

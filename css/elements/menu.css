@@ -1,0 +1,11 @@
+.menu{
+    flex: 1;
+    order: 2;
+    position: sticky;
+    width: 30%;
+    height: 100%;
+    right: 0;
+    min-width: 300px;
+    bottom: 25%;
+    top: 25%;
+}
