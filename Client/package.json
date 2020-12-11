@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "@54696d654a6f6c74/html-injector": "github:54696d654a6f6c74/html-injector",
-    "electron": "^11.0.3"
+    "electron": "^11.0.4"
   }
 }
