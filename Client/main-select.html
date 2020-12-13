@@ -4,10 +4,15 @@
         <meta charset="UTF-8">
         <title>Hello World!</title>
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-        <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+
+        <script defer type="module" src="js/main-select.js"></script>
     </head>
     <body>
+        <div id="main-select-options">
 
+        </div>
+    <!--
         <a onclick="selection('add')" href="operation-target-select.html">
             <h2 class="news-main-item">Добавяне</h2>
         </a>
@@ -17,7 +22,7 @@
         <a onclick="selection('update')" href="operation-target-select.html">
             <h2 class="news-main-item">Редактиране</h2>
         </a>
-
+    -->
         <script>
             function selection(id){
                 localStorage["operationType"] = id;

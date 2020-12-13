@@ -9,9 +9,9 @@
 {
     display: inline-block;
 }
-.wrapper{
+.article-wrapper{
     word-wrap: break-word;
-    flex: 2;
+    flex: 3;
     order: 1;
 }
 #news-main-page{
