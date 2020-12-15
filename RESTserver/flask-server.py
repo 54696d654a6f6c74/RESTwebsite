@@ -47,8 +47,8 @@ def get_news_header(id):
 # which will cause problems for big sets of data
 @app.route('/news', methods=['POST'])
 def post_news():
-    allNews = indexNews()
-    
+    allNews = sorted(indexNews())
+
     path = None
     if len(allNews) != 0:
         path = "./data/news/" + str(int(allNews[len(allNews)-1])+1)

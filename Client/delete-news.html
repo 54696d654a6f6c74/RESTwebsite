@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <meta charset="utf-8" />
 
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link rel="stylesheet" href="../css/style.css" />
 
-        <script defer src="./js/delete-news.js"></script>
+        <script defer type="module" src="./js/delete-news.js"></script>
+        
     </head>
     <body>
-        <!-- abstract home page into general wrapper -->
-        <div id="home-page-main">
-        <!-- abstract this wrapper too -->
-            <div class="wrapper" id="news-page-main">
+        
+        <div class="article-wrapper" id="insert-target">
 
-            </div >
-        </div>
-
+        </div >
+    
+    <!--
+        Seems as thought this retarded language does not allow
+        modules to be referenced by "onclick" events from HTML.
+        So I cannot have deleteNewsArticle() in delete-news.js,
+        because it's a module... Maybe find a way around this?
+    -->
+        <script defer>
+            async function deleteNewsArticle(id)
+            {
+                await fetch("http://127.0.0.1:5000/news/" + id,
+                {
+                    method: "DELETE"
+                });
+                location.reload();
+            }
+        </script>
     </body>
 </html>
