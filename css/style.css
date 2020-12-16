@@ -11,6 +11,7 @@
 @import url("elements/nav.css");
 @import url("elements/menu.css");
 @import url("elements/news.css");
+@import url("elements/button.css");
 @import url("components/list.css");
 @import url("components/containers.css");
 /* --- */
@@ -29,6 +30,7 @@ body{
     display: block;
     margin-top: 20px;
 } /* flexbox layout rules */
+
 #page-main{
     display: flex;
     flex-flow: row;
@@ -49,12 +51,14 @@ p {
     font-size: 1.2em;
     line-height: 110%;
 }
+
 /* Responsive font size */
 @media screen and (min-width: 320px) {
     html {
       font-size: calc(18px + 6 * ((100vw - 320px) / 680));
     }
 }
+
 @media screen and (min-width: 1000px) {
     html {
       font-size: 16px;

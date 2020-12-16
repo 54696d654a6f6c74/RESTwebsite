@@ -6,6 +6,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
 }
+
 .hor-popout-container
 {
     display: inline-block;
@@ -19,5 +20,5 @@
     font-size: 1.5em;
 }
 nav .hor-popout-item:hover{
-    background-color: #d65a61;
+    background-color: #d65a31;
 }

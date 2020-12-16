@@ -5,15 +5,18 @@
     padding-top: 12px;
     padding-bottom: 12px;
 }
+
 .hor-popout-container
 {
     display: inline-block;
 }
+
 .article-wrapper{
     word-wrap: break-word;
     flex: 3;
     order: 1;
 }
+
 #news-main-page{
     margin-top: 20px;
     padding: 5px;
