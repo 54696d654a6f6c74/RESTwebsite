@@ -1,4 +1,5 @@
 import { getNavigationElement } from "../templates/elements.js";
+import { generateNav } from "./navigator.js";
 
 async function getHeaders()
 {
@@ -22,4 +23,5 @@ async function getHeaders()
     }
 }
 
+document.body.innerHTML = generateNav(["main-select.html"]).stringify + document.body.innerHTML;
 getHeaders();

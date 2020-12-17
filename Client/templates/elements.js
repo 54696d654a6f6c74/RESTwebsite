@@ -20,3 +20,6 @@ export function getNavigationElement(hrefTar = "", onClickFuncName = "", onClick
 
     return template;
 }
+
+export const blankButton = 
+new Tag("a", "", [new Attribute("class", "button")]);

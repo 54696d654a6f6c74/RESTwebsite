@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8" />
+
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <link rel="stylesheet" href="../css/style.css" />
+
+        <script defer type="module" src="./js/delete-news.js"></script>
+        
+    </head>
+    <body>
+        
+        <div class="article-wrapper" id="insert-target">
+
+        </div >
+    
+    <!--
+        Seems as thought this retarded language does not allow
+        modules to be referenced by "onclick" events from HTML.
+        So I cannot have deleteNewsArticle() in delete-news.js,
+        because it's a module... Maybe find a way around this?
+    -->
+        <script defer>
+            
+        </script>
+    </body>
+</html>

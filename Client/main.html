@@ -7,10 +7,28 @@
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link rel="stylesheet" href="../css/style.css" />
 
+        <script defer type="module" src="./js/navigator.js"></script>
+
     </head>
     
     <body>
-        <script defer type="module" src="templates/containers.js"></script>
+        
+        <div id="target"></div>
+    <!--
+        <nav>
+
+                It should go without saying that
+                this is bad and should be abstracted
+
+
+            <div id="client-nav">
+                <button id="back-button">&lt;</button>
+                <button id="forward-button" style="float: right;">&gt;</button>
+            </div>
+
+        </nav>
+    -->
+
         <a href="main-select.html">
             <h2 class="news-main-item">Start</h2>
         </a>

@@ -1,3 +1,5 @@
+import { generateNav } from "./navigator.js";
+
 function generateHeader()
 {
     let title = document.getElementById("news-title").value;
@@ -33,3 +35,5 @@ function submit()
         body: JSON.stringify(json)
     }).then(res => {console.log("Done, response: " + res)})
 }
+
+document.body.innerHTML = generateNav(["main-select.html"]).stringify + document.body.innerHTML;
