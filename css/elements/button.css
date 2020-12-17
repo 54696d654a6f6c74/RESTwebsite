@@ -1,12 +1,18 @@
-button:hover{
-    background-color: #d65a31;
-}
-
-button{
+a.button{
     color: #eeeeee;
     border: none;
     background: none;
     width: 50px;
     height: 100%;
     font-size: 2em;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+a.button:hover{
+    background-color: #d65a31;
+}
+
+a#forward-button.button{
+    float: right;
 }
