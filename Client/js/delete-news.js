@@ -1,7 +1,7 @@
 import { getNavigationElement } from "../templates/elements.js";
 import { generateNav } from "./navigator.js";
 
-async function getHeaders()
+export async function getHeaders()
 {
     let headers = await fetch("http://127.0.0.1:5000/news/headers").catch(err => {console.log(err);})
     .then((dat) => {return dat.json();}).catch(err => {console.log(err);})
@@ -17,7 +17,7 @@ async function getHeaders()
     {   
         let header = JSON.parse(headers[headers.length - i - 1]);
 
-        let item = getNavigationElement("", "deleteNewsArticle", headers.length - i - 1, header.title, i.toString());
+        let item = getNavigationElement("", "selectArticle", headers.length - i - 1, header.title, i.toString());
 
         document.getElementById("insert-target").innerHTML += item.stringify;
     }
