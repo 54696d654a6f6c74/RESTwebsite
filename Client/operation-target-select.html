@@ -5,10 +5,14 @@
         <title>Hello World!</title>
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link rel="stylesheet" href="../css/style.css" />
-        <script defer type="module" src="./js/navigator.js"></script>
+        <script defer type="module" src="./js/operation-target.js"></script>
     </head>
     <body>
         
+        <div id="insert-target">
+
+        </div>
+    <!--
         <a name="selection" onclick="selection('news')" href="add-news.html">
             <h2 class="news-main-item">Новина</h2>
         </a>
@@ -16,7 +20,7 @@
         <a name="selection" onclick="selection('contact')" href="#">
             <h2 class="news-main-item">Контакт</h2>
         </a>
-
+    -->
         <script>
             function selection(id){
                 localStorage["operationTarget"] = id;

@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../css/style.css" />
 
         <script defer src="./js/add-news.js"></script>
+        <script defer type="module" src="./js/add.js"></script>
     </head>
 
     <body>
@@ -17,19 +18,15 @@
             document.body.innerHTML = generateNav(["main-select.html"]).stringify + document.body.innerHTML;
         </script>
 
-        <h3>Title</h3>
-        <input type="text" id="news-title"></input>
+        <!--
+            Styling can be controlled with a css file
+            that changes size and stuff like that
+            using the ID set by the generator
+        -->
+        <div id="inputs">
 
-        <h3>Author</h3>
-        <input type="text" id="news-author"></input>
+        </div>
 
-        <h3>Content</h3>
-        <input type="text" id="news-content"></input>
-    <!--
-        <textarea style="width: 100%; height: 400px;" id="news-content">
-
-        </textarea>
-    -->
         <button onclick="submit()">Submit</button>
     </body>
 </html>

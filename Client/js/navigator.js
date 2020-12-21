@@ -1,12 +1,6 @@
-let allElements = document.getElementsByName("selection");
-
-for(let i = 0; i < allElements.length; i++)
-{
-    allElements[i].href = localStorage["operationType"] + "-news.html";
-}
-
 import { blankButton } from "../templates/elements.js";
 import { nav } from "../templates/containers.js";
+
 const Attribute = require("@54696d654a6f6c74/html-injector").Attribute;
 const _ = require("lodash");
 
@@ -44,7 +38,3 @@ export function generateNav(tars, backButton = true)
     }
     return clientNav;
 }
-
-// There are more elegant ways of doing this
-// but as far as my research goes this is the fastest
-// document.body.innerHTML = generateNav().stringify + document.body.innerHTML;

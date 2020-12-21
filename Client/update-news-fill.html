@@ -8,23 +8,21 @@
         <link rel="stylesheet" href="../css/style.css" />
 
         <script defer type="module" src="./js/update-news.js"></script>
+        <script defer type="module" src="./js/add.js"></script>
         
     </head>
     <body>
-        
-        <div class="article-wrapper" id="insert-target">
 
-        </div >
-    
-        <script defer>
-            function selectArticle(id)
-            {
-                console.log(id);
-            }
-            function updateArticle(id){
+        <script defer type="module">
+            import { generateNav } from "./js/navigator.js";
 
-            }
+            document.body.innerHTML = generateNav(["main-select.html"]).stringify + document.body.innerHTML;
         </script>
+
+        <div id="inputs">
+
+        </div>
+    
     <!--
         Seems as thought this retarded language does not allow
         modules to be referenced by "onclick" events from HTML.
