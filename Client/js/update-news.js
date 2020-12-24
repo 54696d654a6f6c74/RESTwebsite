@@ -1,9 +1,5 @@
-import { getHeaders, generateNavigationElement } from "./delete-news.js";
-import { generateNav } from "./navigator.js";
-
-const Attribute = require("@54696d654a6f6c74/html-injector").Attribute;
-
-generateNav("operation-target-select.html");
+import { getHeaders } from "./delete-news.js";
+import { writeElements } from "./common.js";
 
 async function showHeaders(headers, target)
 {
@@ -13,11 +9,7 @@ async function showHeaders(headers, target)
     {   
         let header = JSON.parse(headers[headers.length - i - 1]);
 
-        let item = await generateNavigationElement(header, headers.length - i - 1);
-        
-        item.atribs.push(new Attribute("href", "update-news-fill.html"));
-
-        document.getElementById(target).innerHTML += item.stringify;
+        writeElements(target, header.title, "selectArticle", headers.length - i - 1, "update-news-fill.html");
     }
 }
 

@@ -13,9 +13,8 @@
     <body>
 
         <script defer type="module">
-            import { generateNav } from "./js/navigator.js";
-
-            document.body.innerHTML = generateNav(["main-select.html"]).stringify + document.body.innerHTML;
+            import { writeNav} from "./js/navigator.js";
+            writeNav(["main-select.html"]);
         </script>
 
         <!--

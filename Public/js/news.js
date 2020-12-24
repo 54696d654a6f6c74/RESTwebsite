@@ -1,12 +1,5 @@
 import * as utils from './utils.js';
 
-// Abstract this function away
-async function getNewsPart(part, id)
-{
-    // A validation step could be done before returning
-    return await utils.httpGet("news/" + id + "/" + part);
-}
-
 function writeNewsArticle(id, header)
 {
     document.getElementById("news-page-main").innerHTML += `
@@ -22,7 +15,7 @@ async function load()
     
     while(!done)
     {
-        let headerInfo = await getNewsPart("header", i);
+        let headerInfo = await utils.getNewsPart("header", i);
         
         if(headerInfo == null)
             break;

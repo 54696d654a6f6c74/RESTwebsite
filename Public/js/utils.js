@@ -3,3 +3,9 @@ export async function httpGet(path){
         .then((dat) => {return dat.json();}).catch(() => {return null;})
         .then((dat) => {return dat;}).catch((err) => {console.log(err)});
 }
+
+export async function getNewsPart(part, id)
+{
+    // A validation step could be done before returning
+    return await httpGet("news/" + id + "/" + part);
+}

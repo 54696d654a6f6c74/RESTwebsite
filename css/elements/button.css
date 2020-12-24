@@ -2,11 +2,11 @@ a.button{
     color: #eeeeee;
     border: none;
     background: none;
-    width: 50px;
+    width: 30px;
     height: 100%;
     font-size: 2em;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 
 a.button:hover{

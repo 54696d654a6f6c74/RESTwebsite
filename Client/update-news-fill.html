@@ -7,16 +7,15 @@
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link rel="stylesheet" href="../css/style.css" />
 
-        <script defer type="module" src="./js/update-news.js"></script>
-        <script defer type="module" src="./js/add.js"></script>
+        <script defer type="module" src="./js/update-fill.js"></script>
         
     </head>
     <body>
 
         <script defer type="module">
-            import { generateNav } from "./js/navigator.js";
+            import { writeNav } from "./js/navigator.js";
 
-            document.body.innerHTML = generateNav(["main-select.html"]).stringify + document.body.innerHTML;
+            writeNav(["main-select.html"]);
         </script>
 
         <div id="inputs">
