@@ -1,5 +1,6 @@
 import * as elements from "../templates/elements.js";
 import * as containers from "../templates/containers.js";
+import * as utils from "../../Public/js/utils.js";
 
 const { Tag, Attribute, Injector} = require("@54696d654a6f6c74/html-injector");
 const _ = require("lodash");
@@ -106,19 +107,21 @@ export function generateInputs(inputTitles, inputIDs, inputContents){
     else throw "Both inputs must either be arrays or non-arrays!";
 }
 
-export async function injectHeaders(headers, target, funcName)
+export async function injectHeaders(headers, target, funcName, href)
 {
     // They're displayed in wrong order since the server
     // cannot query its file system in the correct order.
     // This is a serverside issue and cannot be fixed there
     headers = await headers;
+    let indecies = await utils.getNewsPart("indecies");
+    
     document.getElementById(target).innerHTML = "";
 
     for(let i = 0; i < headers.length; i++)
     {   
-        let header = JSON.parse(headers[headers.length - i - 1]);
+        let header = JSON.parse(headers[i]);
         if(href != undefined)
-            writeElements(target, header.title, funcName, headers.length - i - 1, href);       
-        else writeElements(target, header.title, funcName, headers.length - i - 1);       
+            writeElements(target, header.title, funcName, indecies[i], href);       
+        else writeElements(target, header.title, funcName, indecies[i]);       
     }
 }

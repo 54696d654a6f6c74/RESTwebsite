@@ -17,16 +17,30 @@ CORS(app)
 def get_contacts():
     return open("data/contact.json", "r").read()
 
-@app.route('/news/headers', methods=['GET'])
-def get_all_news_headers():
+def get_news_headers(sort_news):
     headers = []
-    allNews = indexNews()
-    print(allNews)
+    allNews = sorted(indexNews()) if sort_news else indexNews()
     for i in range(len(allNews)):
         header = open("data/news/{}/header.json".format(allNews[i]), "r")
         headers.append(header.read())
         header.close()
     return json.dumps(headers)
+
+@app.route('/news/headers', methods=['GET'])
+def get_all_news_headers():
+    return get_news_headers(False)
+
+@app.route('/news/headers/sorted', methods=['GET'])
+def get_all_news_headers_sorted():
+    return get_news_headers(True)
+
+@app.route('/news/indecies', methods=['GET'])
+def get_indecies():
+    return json.dumps(indexNews())
+
+@app.route('/news/indecies/sorted', methods=['GET'])
+def get_indecies_sorted():
+    return json.dumps(sorted(indexNews()))
 
 @app.route('/news/<id>/content', methods=['GET'])
 def get_news_article(id):
@@ -74,9 +88,8 @@ def post_news():
 
 @app.route("/news/<id>", methods=['DELETE'])
 def delete_news(id):
-    allNews = indexNews()
     try:
-        shutil.rmtree("data/news/" + allNews[int(id)])
+        shutil.rmtree("data/news/" + str(id))
     except FileNotFoundError:
         return flask.abort(404)
     return flask.Response(200)
