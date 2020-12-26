@@ -105,3 +105,20 @@ export function generateInputs(inputTitles, inputIDs, inputContents){
         Injector.injectHTML(createInput(inputTitles, inputIDs), "inputs");
     else throw "Both inputs must either be arrays or non-arrays!";
 }
+
+export async function injectHeaders(headers, target, funcName)
+{
+    // They're displayed in wrong order since the server
+    // cannot query its file system in the correct order.
+    // This is a serverside issue and cannot be fixed there
+    headers = await headers;
+    document.getElementById(target).innerHTML = "";
+
+    for(let i = 0; i < headers.length; i++)
+    {   
+        let header = JSON.parse(headers[headers.length - i - 1]);
+        if(href != undefined)
+            writeElements(target, header.title, funcName, headers.length - i - 1, href);       
+        else writeElements(target, header.title, funcName, headers.length - i - 1);       
+    }
+}

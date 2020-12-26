@@ -7,5 +7,7 @@ export async function httpGet(path){
 export async function getNewsPart(part, id)
 {
     // A validation step could be done before returning
-    return await httpGet("news/" + id + "/" + part);
+    if(id != undefined)
+        return await httpGet("news/" + id + "/" + part);
+    else return await(httpGet("news/" + part));
 }
