@@ -109,12 +109,11 @@ export function generateInputs(inputTitles, inputIDs, inputContents){
 
 export async function injectHeaders(headers, target, funcName, href)
 {
-    // They're displayed in wrong order since the server
-    // cannot query its file system in the correct order.
-    // This is a serverside issue and cannot be fixed there
+    // I can now add a button for the user to change the sorting.
+    // By default no sorting is used for best performance
     headers = await headers;
     let indecies = await utils.getNewsPart("indecies");
-    
+
     document.getElementById(target).innerHTML = "";
 
     for(let i = 0; i < headers.length; i++)

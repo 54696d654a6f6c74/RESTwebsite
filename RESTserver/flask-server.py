@@ -42,19 +42,43 @@ def get_indecies():
 def get_indecies_sorted():
     return json.dumps(sorted(indexNews()))
 
-@app.route('/news/<id>/content', methods=['GET'])
-def get_news_article(id):
-    return open("data/news/{}/content.json".format(id), "r").read()
+def get_news_content_by_id(id):
+    return open("data/news/{}/content.json".format(id), "r+")
 
-@app.route('/news/<id>/header', methods=['GET'])
-def get_news_header(id):
+def update_news_content(id, data):
+    file = get_news_content_by_id(id)
+    file.writelines(json.dumps(data))
+    file.truncate()
+
+@app.route('/news/<id>/content', methods=['GET', 'PUT'])
+def get_news_article(id):
+    if flask.request.method == 'GET':
+        return get_news_content_by_id(id).read()
+    else:
+        update_news_content(id, flask.request.get_json())
+        return flask.Response(200)
+
+def get_news_header_by_id(id):
     file = None
     try:
-        file = open('data/news/{}/header.json'.format(id), "r").read()
+        file = open('data/news/{}/header.json'.format(id), "r+")
     except(FileNotFoundError):
         return flask.abort(flask.Response(None))
     
     return file
+
+def update_news_header(id, data):
+    file = get_news_header_by_id(id)
+    file.writelines(json.dumps(data))
+    file.truncate()
+
+@app.route('/news/<id>/header', methods=['GET', 'PUT'])
+def get_news_header(id):
+    if flask.request.method == 'GET':
+        return get_news_header_by_id(id).read()
+    else:
+        update_news_header(id, flask.request.get_json())
+        return flask.Response(200)
 
 # os.listdir() does not return folders in a
 # sequential order so a sort() is necessary

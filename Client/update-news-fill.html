@@ -22,6 +22,37 @@
 
         </div>
     
+        <button onclick="submit()">Submit</button>
+        <script defer>
+            function sendRequest(target, data)
+            {
+                fetch("http://127.0.0.1:5000/news/" + localStorage["updateArticle"] + "/" + target, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => {console.log("Done, response: " + res)})
+            }
+
+            function submit()
+            {
+                let title = document.getElementById("news-title").value;
+                let author = document.getElementById("news-author").value;
+
+                const header = {
+                    title: title,
+                    author: author,
+                    date: new Date().toLocaleString()
+                }
+                const content = {
+                    fill: document.getElementById("news-content").value
+                }
+
+                sendRequest("header", header);
+                sendRequest("content", content);
+            }
+        </script>
     <!--
         Seems as thought this retarded language does not allow
         modules to be referenced by "onclick" events from HTML.
