@@ -24,6 +24,8 @@
     
         <button onclick="submit()">Submit</button>
         <script defer>
+            const md = require("markdown").markdown;
+
             function sendRequest(target, data)
             {
                 fetch("http://127.0.0.1:5000/news/" + localStorage["updateArticle"] + "/" + target, {
@@ -46,7 +48,7 @@
                     date: new Date().toLocaleString()
                 }
                 const content = {
-                    fill: document.getElementById("news-content").value
+                    fill: md.toHTML(document.getElementById("news-content").value)
                 }
 
                 sendRequest("header", header);

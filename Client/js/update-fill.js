@@ -3,10 +3,6 @@ import { getNewsPart } from "../../Public/js/utils.js";
 
 let header = []
 
-// This does not work properly yet because
-// I'm basing the IDs off of the index in a 
-// regular array, wihle the real indexi a 
-// different value in the filesystem!!!
 async function fillHeader()
 {
     let id = localStorage["updateArticle"];
@@ -16,7 +12,7 @@ async function fillHeader()
     header.push(info.author);
 
     info = await getNewsPart("content", id);
-    header.push(info.fill);
+    header.push(info.md);
 }
 
 async function load()

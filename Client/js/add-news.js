@@ -20,6 +20,7 @@ function submit()
 {
     const header = generateHeader();
     const content = {
+        md: document.getElementById("news-content").value,
         fill: md.toHTML(document.getElementById("news-content").value)
     };
     const json = {
