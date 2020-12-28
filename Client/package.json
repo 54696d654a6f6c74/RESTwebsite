@@ -12,6 +12,7 @@
   "dependencies": {
     "@54696d654a6f6c74/html-injector": "github:54696d654a6f6c74/html-injector",
     "electron": "^11.0.4",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "markdown": "^0.5.0"
   }
 }
