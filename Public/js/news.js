@@ -1,27 +1,24 @@
 import * as utils from './utils.js';
 
-function writeNewsArticle(id, header)
+function writeNewsArticle(id, title)
 {
     document.getElementById("news-page-main").innerHTML += `
     <a onclick="selected(${id})" href="news-page.html">
-        <h2 class="news-main-item">${header}</h2>
+        <h2 class="news-main-item">${title}</h2>
     </a>`;
 }
 
 async function load()
 {
-    let done = false;
-    let i = 1;
-    
-    while(!done)
-    {
-        let headerInfo = await utils.getNewsPart("header", i);
-        
-        if(headerInfo == null)
-            break;
+    let headers = await utils.getNewsPart("headers");
+    let indecies = await utils.getNewsPart("indecies");
 
-        writeNewsArticle(i, headerInfo.title);
-        i++;
+    document.getElementById("news-page-main").innerHTML = "";
+
+    for(let i = 0; i < headers.length; i++)
+    {
+        let header = JSON.parse(headers[i]);
+        writeNewsArticle(indecies[i], header.title);
     }
 }
 

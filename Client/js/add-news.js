@@ -1,3 +1,5 @@
+const md = require("markdown").markdown;
+
 function generateHeader()
 {
     let title = document.getElementById("news-title").value;
@@ -18,7 +20,7 @@ function submit()
 {
     const header = generateHeader();
     const content = {
-        fill: document.getElementById("news-content").value
+        fill: md.toHTML(document.getElementById("news-content").value)
     };
     const json = {
         header: header,
