@@ -53,7 +53,9 @@ def update_news_content(id, data):
 @app.route('/news/<id>/content', methods=['GET', 'PUT'])
 def get_news_article(id):
     if flask.request.method == 'GET':
-        return get_news_content_by_id(id).read()
+        obj = json.load(get_news_content_by_id(id))
+        del obj['md']
+        return json.dumps(obj)
     else:
         update_news_content(id, flask.request.get_json())
         return flask.Response(200)
