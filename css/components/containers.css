@@ -15,6 +15,7 @@
     word-wrap: break-word;
     flex: 3;
     order: 1;
+    min-height: 50vh;
 }
 
 #news-main-page{
