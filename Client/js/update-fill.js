@@ -11,7 +11,7 @@ async function fillHeader()
     header.push(info.title);
     header.push(info.author);
 
-    info = await getNewsPart("content", id);
+    info = await getNewsPart("content/md", id);
     header.push(info.md);
 }
 

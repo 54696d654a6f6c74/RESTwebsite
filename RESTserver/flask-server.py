@@ -60,6 +60,12 @@ def get_news_article(id):
         update_news_content(id, flask.request.get_json())
         return flask.Response(200)
 
+@app.route('/news/<id>/content/md', methods=['GET'])
+def get_news_article_md(id):
+    obj = json.load(get_news_content_by_id(id))
+    del obj['fill']
+    return json.dumps(obj)
+
 def get_news_header_by_id(id):
     file = None
     try:
