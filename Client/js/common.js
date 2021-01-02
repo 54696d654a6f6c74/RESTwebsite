@@ -75,7 +75,7 @@ export function generateNav(tars, backButton = true)
 }
 
 // This could be refactored further
-export function generateInputs(inputTitles, inputIDs, inputContents, inputElement = element.textInput){
+export function generateInputs(inputTitles, inputIDs, inputContents, inputElement = elements.textInput){
     function createInput(title, id, contnet, element)
     {
         let input = _.cloneDeep(element);
@@ -87,15 +87,16 @@ export function generateInputs(inputTitles, inputIDs, inputContents, inputElemen
         return input;
     }
 
-    if(Array.isArray(inputIDs) && Array.isArray(inputTitles) && Array.isArray(inputElement))
+    if(Array.isArray(inputIDs) && Array.isArray(inputTitles))
     {
         if(inputIDs.length == inputTitles.length)
         {
             for(let i = 0; i < inputIDs.length; i++)
             {
-                let input = inputContents == undefined 
-                ? createInput(inputTitles[i], inputIDs[i], undefined, inputElement[i]) : 
-                createInput(inputTitles[i], inputIDs[i], inputContents[i], inputElement[i]);
+                // This check is naive!
+                let input = Array.isArray(inputElement[0])
+                ? createInput(inputTitles[i], inputIDs[i], inputContents == undefined ? undefined : inputContents[i], inputElement[i]) : 
+                createInput(inputTitles[i], inputIDs[i], inputContents == undefined ? undefined : inputContents[i], inputElement);
 
                 Injector.injectHTML(input, "inputs");
             }
@@ -104,7 +105,7 @@ export function generateInputs(inputTitles, inputIDs, inputContents, inputElemen
     }
     else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles) && !Array.isArray(inputElement))
         Injector.injectHTML(createInput(inputTitles, inputIDs, inputContents, inputElement), "inputs");
-    else throw "All three arguments must either be arrays or non-arrays!";
+    else throw "Both arguments must either be arrays or non-arrays!";
 }
 
 export async function injectHeaders(headers, target, funcName, href)
