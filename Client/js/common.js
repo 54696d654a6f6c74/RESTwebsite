@@ -75,10 +75,10 @@ export function generateNav(tars, backButton = true)
 }
 
 // This could be refactored further
-export function generateInputs(inputTitles, inputIDs, inputContents){
-    function createInput(title, id, contnet)
+export function generateInputs(inputTitles, inputIDs, inputContents, inputElement = element.textInput){
+    function createInput(title, id, contnet, element)
     {
-        let input = _.cloneDeep(elements.textInput);
+        let input = _.cloneDeep(element);
         input[0].content = title;
         input[1].atribs.push(new Attribute("id", id));
         if(contnet != undefined)
@@ -87,24 +87,24 @@ export function generateInputs(inputTitles, inputIDs, inputContents){
         return input;
     }
 
-    if(Array.isArray(inputIDs) && Array.isArray(inputTitles))
+    if(Array.isArray(inputIDs) && Array.isArray(inputTitles) && Array.isArray(inputElement))
     {
         if(inputIDs.length == inputTitles.length)
         {
             for(let i = 0; i < inputIDs.length; i++)
             {
                 let input = inputContents == undefined 
-                ? createInput(inputTitles[i], inputIDs[i]) : 
-                createInput(inputTitles[i], inputIDs[i], inputContents[i]);
+                ? createInput(inputTitles[i], inputIDs[i], undefined, inputElement[i]) : 
+                createInput(inputTitles[i], inputIDs[i], inputContents[i], inputElement[i]);
 
                 Injector.injectHTML(input, "inputs");
             }
         }
         else throw "Both array lengths must match!";
     }
-    else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles))
-        Injector.injectHTML(createInput(inputTitles, inputIDs), "inputs");
-    else throw "Both inputs must either be arrays or non-arrays!";
+    else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles) && !Array.isArray(inputElement))
+        Injector.injectHTML(createInput(inputTitles, inputIDs, inputContents, inputElement), "inputs");
+    else throw "All three arguments must either be arrays or non-arrays!";
 }
 
 export async function injectHeaders(headers, target, funcName, href)
