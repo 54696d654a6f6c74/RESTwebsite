@@ -13,3 +13,9 @@ export const textInput =
 new Tag("h3", "", []),
 new Tag("input", "", [new Attribute ("type", "text")])
 ];
+
+export const mdInput = 
+[
+new Tag("h3", "", []),
+new Tag("textarea", "", [])
+];

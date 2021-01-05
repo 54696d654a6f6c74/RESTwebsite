@@ -4,8 +4,6 @@ import { writeElements } from "./common.js";
 // main-select.js maybe generalize this?
 
 const titles = ["Новина", "Контакт"];
-const values = ["'news'", "'contact'"];
+const values = ["'news'", "'contacts'"];
 
-let target = localStorage["operationType"] + "-" + localStorage["operationTarget"] + ".html";
-
-writeElements("insert-target", titles, "selection", values, target);
+writeElements("insert-target", titles, "selection", values, localStorage["operationType"] + ".html");

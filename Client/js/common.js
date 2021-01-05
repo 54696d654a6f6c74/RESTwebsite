@@ -75,28 +75,33 @@ export function generateNav(tars, backButton = true)
 }
 
 // This could be refactored further
-export function generateInputs(inputTitles, inputIDs, inputContents, inputElement = elements.textInput){
-    function createInput(title, id, contnet, element)
+export function generateInputs(inputTitles, inputClasses, submitFunc, inputContents){
+    let classToElementType = {
+        "text-input": elements.textInput,
+        "md-input": elements.mdInput
+    }
+
+    function createInput(title, htmlClass, contnet)
     {
-        let input = _.cloneDeep(element);
+        let input = _.cloneDeep(classToElementType[htmlClass]);
         input[0].content = title;
-        input[1].atribs.push(new Attribute("id", id));
+        input[1].atribs.push(new Attribute("class", htmlClass));
         if(contnet != undefined)
             input[1].atribs.push(new Attribute("value", contnet));
 
         return input;
     }
 
-    if(Array.isArray(inputIDs) && Array.isArray(inputTitles))
+    if(Array.isArray(inputClasses) && Array.isArray(inputTitles))
     {
-        if(inputIDs.length == inputTitles.length)
+        if(inputClasses.length == inputTitles.length)
         {
-            for(let i = 0; i < inputIDs.length; i++)
+            for(let i = 0; i < inputClasses.length; i++)
             {
                 // This check is naive!
-                let input = Array.isArray(inputElement[0])
-                ? createInput(inputTitles[i], inputIDs[i], inputContents == undefined ? undefined : inputContents[i], inputElement[i]) : 
-                createInput(inputTitles[i], inputIDs[i], inputContents == undefined ? undefined : inputContents[i], inputElement);
+                let input = inputContents == undefined ? 
+                createInput(inputTitles[i], inputClasses[i], undefined) : 
+                createInput(inputTitles[i], inputClasses[i], inputContents[i]);
 
                 Injector.injectHTML(input, "inputs");
             }
@@ -106,6 +111,12 @@ export function generateInputs(inputTitles, inputIDs, inputContents, inputElemen
     else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles) && !Array.isArray(inputElement))
         Injector.injectHTML(createInput(inputTitles, inputIDs, inputContents, inputElement), "inputs");
     else throw "Both arguments must either be arrays or non-arrays!";
+    
+    // Ensures that the event will be 
+    // linked properly and on time
+    window.onload = () => {
+        document.getElementById("submit").addEventListener("click", submitFunc);
+    };
 }
 
 export async function injectHeaders(headers, target, funcName, href)
@@ -124,4 +135,15 @@ export async function injectHeaders(headers, target, funcName, href)
             writeElements(target, header.title, funcName, indecies[i], href);       
         else writeElements(target, header.title, funcName, indecies[i]);       
     }
+}
+
+export function addRequest(json)
+{
+    fetch("http://127.0.0.1:5000/" + localStorage["operationTarget"], {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(json)
+    }).then(res => {console.log("Done, response: " + res)})
 }

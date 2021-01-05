@@ -5,21 +5,61 @@ import json
 import os
 import shutil
 
-# count the number of news to allow auto indexing
-def indexNews():
-    return os.listdir("./data/news/")
+def indexData(type):
+    return os.listdir("./data/{}".format(type))
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 CORS(app)
 
-@app.route('/contacts', methods=['GET'])
+# Abstract the POST side into a helper
+# since it's very similar to 'news' POST
+@app.route('/contacts', methods=['GET', 'POST'])
 def get_contacts():
-    return open("data/contact.json", "r").read()
+    if flask.request.method == 'GET':
+        contacts = sorted(indexData("contacts"))
+        arr = []
+        for i in contacts:
+            arr.append(json.load(open("./data/contacts/{}/details.json".format(i), "r")))
+        return json.dumps(arr)
+
+    indecies = sorted(indexData("contacts"))
+
+    path = None
+
+    if len(indecies) != 0:
+        path = "./data/contacts/" + str(int(indecies[len(indecies)-1])+1)
+    else: path = "./data/contacts/1"
+
+    os.mkdir(path)
+    data = flask.request.get_json()
+
+    file = open(path + "/details.json", "w")
+    file.write(json.dumps(data))
+    file.close
+
+    return flask.Response(200)
+
+@app.route('/contacts/<id>', methods=['GET', 'PUT', 'DELETE'])
+def interact_contact_by_id(id):
+    if flask.request.method == 'GET':
+        return open("./data/contacts/{}/details.json".format(id), "r").read()
+    
+    elif flask.request.method == 'PUT':
+        target = open("./data/contacts/{}/details.json".format(id), "w")
+        target.writelines(json.dumps(flask.request.get_json()))
+        target.truncate()
+        target.close()
+    try:
+        shutil.rmtree("data/contacts/" + str(id))
+    except FileNotFoundError:
+        return flask.abort(404)
+    return flask.Response(200)
+
 
 def get_news_headers(sort_news):
     headers = []
-    allNews = sorted(indexNews()) if sort_news else indexNews()
+    allNews = sorted(indexData("news")) if sort_news else indexData("news")
     for i in range(len(allNews)):
         header = open("data/news/{}/header.json".format(allNews[i]), "r")
         headers.append(header.read())
@@ -36,11 +76,11 @@ def get_all_news_headers_sorted():
 
 @app.route('/news/indecies', methods=['GET'])
 def get_indecies():
-    return json.dumps(indexNews())
+    return json.dumps(indexData("news"))
 
 @app.route('/news/indecies/sorted', methods=['GET'])
 def get_indecies_sorted():
-    return json.dumps(sorted(indexNews()))
+    return json.dumps(sorted(indexData("news")))
 
 def get_news_content_by_id(id):
     return open("data/news/{}/content.json".format(id), "r+")
@@ -93,7 +133,7 @@ def get_news_header(id):
 # which will cause problems for big sets of data
 @app.route('/news', methods=['POST'])
 def post_news():
-    allNews = sorted(indexNews())
+    allNews = sorted(indexData("news"))
 
     path = None
     if len(allNews) != 0:
