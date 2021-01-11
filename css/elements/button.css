@@ -16,3 +16,19 @@ a.button:hover{
 a#forward-button.button{
     float: right;
 }
+button{
+    color: #222831;
+    border: none;
+    height: 100%;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: large;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+button:hover{
+    background-color: #d65a31;
+}

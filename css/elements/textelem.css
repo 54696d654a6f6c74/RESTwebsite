@@ -1,0 +1,10 @@
+.text-input{
+    min-width: 255px;
+    width: 35%;
+}
+.md-input{
+    min-width: 255px;
+    min-height: 125px;
+    width: 35%;
+    height: 35%;
+}
