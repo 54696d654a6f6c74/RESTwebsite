@@ -14,16 +14,23 @@ CORS(app)
 
 # Abstract the POST side into a helper
 # since it's very similar to 'news' POST
-@app.route('/contacts', methods=['GET', 'POST'])
+@app.route('/contacts', methods=['GET', 'POST', 'DELETE'])
 def get_contacts():
+    indecies = sorted(map(int, indexData("contacts")))
+
     if flask.request.method == 'GET':
-        contacts = sorted(indexData("contacts"))
         arr = []
-        for i in contacts:
+        for i in indecies:
             arr.append(json.load(open("./data/contacts/{}/details.json".format(i), "r")))
         return json.dumps(arr)
 
-    indecies = sorted(indexData("contacts"))
+    if flask.request.method == 'DELETE':
+        index = flask.request.get_json()
+        try:
+            shutil.rmtree("./data/contacts/" + str(indecies[index['index']]))
+            return flask.Response(200)
+        except FileNotFoundError:
+            return flask.abort(404)
 
     path = None
 
@@ -50,29 +57,39 @@ def interact_contact_by_id(id):
         target.writelines(json.dumps(flask.request.get_json()))
         target.truncate()
         target.close()
+        return
     try:
         shutil.rmtree("data/contacts/" + str(id))
     except FileNotFoundError:
         return flask.abort(404)
     return flask.Response(200)
 
-
-def get_news_headers(sort_news):
+def get_data_headers(headerType, headerFileName, sortHeaders):
     headers = []
-    allNews = sorted(indexData("news")) if sort_news else indexData("news")
-    for i in range(len(allNews)):
-        header = open("data/news/{}/header.json".format(allNews[i]), "r")
+    allHeaders = sorted(map(int, indexData(headerType))) if sortHeaders else indexData(headerType)
+    for i in range(len(allHeaders)):
+        header = open("data/{}/{}/{}.json".format(headerType, allHeaders[i], headerFileName), "r")
         headers.append(header.read())
         header.close()
-    return json.dumps(headers)
+    return headers
 
+@app.route('/contacts/headers', methods=['GET'])
+def get_contact_headers():
+    return json.dumps(get_data_headers("contacts", "details", False))
+
+@app.route('/contacts/headers/sorted', methods=['GET'])
+def get_contact_headers_sorted():
+    return json.dumps(get_data_headers("contacts", "details", True))
+
+# This This one is faster but only by around 5ms
+# use only if performace is VERY necessary
 @app.route('/news/headers', methods=['GET'])
 def get_all_news_headers():
-    return get_news_headers(False)
+    return json.dumps(get_data_headers("news", "header", False))
 
 @app.route('/news/headers/sorted', methods=['GET'])
 def get_all_news_headers_sorted():
-    return get_news_headers(True)
+    return json.dumps(get_data_headers("news", "header", True))
 
 @app.route('/news/indecies', methods=['GET'])
 def get_indecies():
@@ -131,9 +148,18 @@ def get_news_header(id):
 # os.listdir() does not return folders in a
 # sequential order so a sort() is necessary
 # which will cause problems for big sets of data
-@app.route('/news', methods=['POST'])
-def post_news():
-    allNews = sorted(indexData("news"))
+@app.route('/news', methods=['POST', 'DELETE'])
+def update_news():
+    if flask.request.method == 'DELETE':
+        indecies = sorted(map(int, indexData("news")))
+        index = flask.request.get_json()
+        try:
+            shutil.rmtree("./data/news/" + str(indecies[index['index']]))
+            return flask.Response(200)
+        except FileNotFoundError:
+            return flask.abort(404)
+
+    allNews = sorted(map(int, indexData("news"))) # have to convert to int for the sort to work properly
 
     path = None
     if len(allNews) != 0:
