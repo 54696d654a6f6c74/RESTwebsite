@@ -17,17 +17,25 @@ a#forward-button.button{
     float: right;
 }
 button{
-    color: #222831;
+    background: none;
+    color: #eeeeee;
     border: none;
     height: 100%;
     text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size: large;
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    cursor: pointer;
+}
+button#submit{
+    font-size: 2em;
+    position: fixed;
+    top: 90%;
+    width: 100%;
+    height: fit-content;
+    font-weight: bold;
+    margin: 0;
 }
 button:hover{
     background-color: #d65a31;
