@@ -7,7 +7,7 @@ from Views.ContactsBlueprint import ContactsView
 
 def bind(app: Flask, name, type, prefix, **initArgs):
     bp = Blueprint(name, __name__, url_prefix=prefix)
-    type.bind(bp, type, **initArgs)
+    type.bind(bp, **initArgs)
     app.register_blueprint(bp)
 
 
@@ -22,14 +22,18 @@ bind(app,
      "news",
      NewsView,
      "/news",
-     file_path="./data/news/{}/header.json",
-     path="/news")
+     file_path="/{}/header.json",
+     path="/news",
+     files=["header.json", "content.json"])
+
 
 bind(app,
      "contacts",
      ContactsView,
      "/contacts",
-     file_path="./data/contacts/{}/details.json",
-     path="/contacts")
+     file_path="/{}/details.json",
+     path="/contacts",
+     files=["details.json"]
+     )
 
 app.run()

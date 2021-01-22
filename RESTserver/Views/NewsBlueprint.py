@@ -1,15 +1,10 @@
-from Views.GenericViews.ListableView import ListableView
+from Views.GenericViews.PostableView import PostableView
+from Views.GenericViews.DeleteableView import DeleteableView
 
-from json import dumps
-from os import listdir
+from flask import Blueprint
 
 
-class NewsView(ListableView):
-    def __init__(self, sorted: bool, path):
-        super().__init__(sorted, path)
-
-    def index_data(self):
-        return listdir("./data/news")
-
-    def get(self):
-        return dumps(self.get_header_data(self.sorted))
+class NewsView(PostableView, DeleteableView):
+    def bind(bp: Blueprint, file_path, path, files):
+        PostableView.bind(bp, file_path, path, files)
+        DeleteableView.bind(bp, path, files)
