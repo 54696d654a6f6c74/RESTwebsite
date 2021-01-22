@@ -21,5 +21,8 @@ new Tag("input", "",
 export const mdInput = 
 [
 new Tag("h3", "", []),
-new Tag("textarea", "", [new Attribute ("class", "md-input")])
+new Tag("textarea", "", [
+    new Attribute ("class", "md-input"),
+    new Attribute ("rows", "20")
+])
 ];
