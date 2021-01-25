@@ -55,7 +55,7 @@ class ListableView(BindableView):
                         view_func=view_type.as_view(path+"/sorted",
                                                     sorted=True,
                                                     path=view_type.data_root + path + file_path,
-                                                    REST_path=view_type.data_root + path,
+                                                    files_path=view_type.data_root + path,
                                                     **extras)
         )
 
