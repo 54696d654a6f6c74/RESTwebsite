@@ -13,7 +13,7 @@ class IndexableView(BindableView):
         self.file = file
 
     # Sanitization can be added here
-    # maybe return 404 if file is not found
+    
     def dispatch_request(self, id):
         try:
             return dumps(open(f"{IndexableView.data_root}{self.path}/{id}/{self.file}", "r").read())

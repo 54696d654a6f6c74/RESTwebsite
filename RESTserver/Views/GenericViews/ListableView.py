@@ -12,10 +12,10 @@ class ListableView(BindableView):
     def __init__(self, sorted, path, files_path):
         self.sorted = sorted
         self.path = path
-        self.filies_path = files_path
+        self.files_path = files_path
 
-    def index_data(self, sortFiles):
-        files = map(int, listdir(self.filies_path))
+    def index_data(self, sortFiles, path):
+        files = map(int, listdir(path))
 
         if sortFiles:
             return sorted(files)
@@ -33,7 +33,8 @@ class ListableView(BindableView):
         return headers
 
     def get_header_data(self, sortHeaders=True):
-        allHeaders = self.index_data(sortHeaders)
+        print(self.files_path)
+        allHeaders = self.index_data(sortHeaders, self.files_path)
 
         return self.iterate_data(allHeaders)
 
