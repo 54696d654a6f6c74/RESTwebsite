@@ -6,5 +6,4 @@ from flask import Blueprint
 
 class ContactsView(PostableView):
     def bind(bp: Blueprint, file_path, path, files):
-        # PostableView.bind(bp, file_path, path, files)
         DeleteableView.bind(bp, file_path, path, files)

@@ -33,31 +33,32 @@ class ListableView(BindableView):
         return headers
 
     def get_header_data(self, sortHeaders=True):
-        print(self.files_path)
         allHeaders = self.index_data(sortHeaders, self.files_path)
 
         return self.iterate_data(allHeaders)
 
     def dispatch_request(self):
-        return dumps(self.get_header_data(self.sorted))
+        data = {
+                "headers": self.get_header_data(self.sorted),
+                "indecies": list(self.index_data(self.sorted, self.files_path))
+               }
+        return dumps(data)
 
     def bind(bp: Blueprint, view_type: BindableView, file_path, path, **extras):
-        bp.add_url_rule(
-                        "",
-                        view_func=view_type.as_view(path,
-                                                    sorted=False,
-                                                    path=view_type.data_root + path + file_path,
-                                                    files_path=view_type.data_root + path,
-                                                    **extras)
+        bp.add_url_rule("",
+            view_func=view_type.as_view(path,
+                sorted=False,
+                path=view_type.data_root + path + file_path,
+                files_path=view_type.data_root + path,
+                **extras)
         )
 
-        bp.add_url_rule(
-                        "/sorted",
-                        view_func=view_type.as_view(path+"/sorted",
-                                                    sorted=True,
-                                                    path=view_type.data_root + path + file_path,
-                                                    files_path=view_type.data_root + path,
-                                                    **extras)
+        bp.add_url_rule("/sorted",
+            view_func=view_type.as_view(path + "/sorted",
+                sorted=True,
+                path=view_type.data_root + path + file_path,
+                files_path=view_type.data_root + path,
+                **extras)
         )
 
         return True

@@ -31,10 +31,9 @@ class UpdateableView(IndexableView):
     def bind(bp: Blueprint, view_type: BindableView, path, files, **extras):
         IndexableView.bind(bp, path, files)
 
-        bp.add_url_rule(
-                        "/<id>",
-                        view_func=view_type.as_view("/"+path,
-                                                    path=path,
-                                                    files=files,
-                                                    **extras)
+        bp.add_url_rule("/<id>",
+            view_func=view_type.as_view("/" + path,
+                path=path,
+                files=files,
+                **extras)
         )

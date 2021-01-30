@@ -13,7 +13,7 @@ class IndexableView(BindableView):
         self.file = file
 
     # Sanitization can be added here
-    
+
     def dispatch_request(self, id):
         try:
             return dumps(open(f"{IndexableView.data_root}{self.path}/{id}/{self.file}", "r").read())
@@ -24,10 +24,8 @@ class IndexableView(BindableView):
         for file in files:
             filename = file[:-5]
 
-            bp.add_url_rule(
-                            "/<id>/"+filename,
-                            view_func=IndexableView.as_view("/"+filename,
-                                                            path=path,
-                                                            file=file
-                                                            )
+            bp.add_url_rule("/<id>/" + filename,
+                view_func=IndexableView.as_view("/" + filename,
+                    path=path,
+                    file=file)
             )
