@@ -40,3 +40,13 @@ button#submit{
 button:hover{
     background-color: #d65a31;
 }
+
+input.ribbon-button{
+    border: 1px solid #eee;
+    font-size: 1.25em;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 10px;
+    min-width: 40px;
+    background: none;
+    color: #eee;
+}
