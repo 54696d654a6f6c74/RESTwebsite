@@ -26,6 +26,11 @@ new Tag("textarea", "", [
     new Attribute ("id", "md-input"),
     new Attribute ("rows", "20")
 ]),
+new Tag("iframe", "", [
+    new Attribute ("class", "md-input"),
+    new Attribute ("id", "md-preview"),
+    new Attribute ("style", "display: none;")
+]),
 new Tag("div", [
     new Tag("input", "", [
         new Attribute("type", "button"),
@@ -86,6 +91,12 @@ new Tag("div", [
         new Attribute("onclick", "insertModifier('line')"),
         new Attribute("value", "-")
     ]),
+    new Tag("input", "", [
+        new Attribute("type", "button"),
+        new Attribute("class", "ribbon-button"),
+        new Attribute("onclick", "mdPreview()"),
+        new Attribute("value", "P")
+    ])
 ], [new Attribute ("id", "ribbon")])
 
 ];

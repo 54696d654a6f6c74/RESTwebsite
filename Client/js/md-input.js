@@ -1,3 +1,4 @@
+const md = require("markdown").markdown;
 // handwritten vanilla js md wysiwyg editor because dependencies are not cool
 function insertModifier(action) {
     var addTextArea = document.getElementById("md-input");
@@ -50,4 +51,16 @@ function insertModifier(action) {
         default:
             break;
     }
+}
+function mdPreview(){
+    if (document.getElementById("md-input").style.cssText == "display: none;") {
+        document.getElementById("md-input").style.cssText = "display: block;";
+        document.getElementById("md-preview").style.cssText = "display: none;";
+    }
+    else {
+        document.getElementById("md-input").style.cssText = "display: none;";
+        document.getElementById("md-preview").style.cssText = "display: block;";
+    }
+    document.getElementById("md-preview").contentWindow.document.body.innerHTML = " ";
+    document.getElementById("md-preview").contentWindow.document.write(md.toHTML(document.getElementById("md-input").value));
 }
