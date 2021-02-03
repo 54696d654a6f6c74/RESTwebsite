@@ -19,17 +19,11 @@ class DeleteableView(UpdateableView, PostableView):
         message = "Succsess"
         code = 200
 
-        # Turns out there might isn't any elegant way
-        # to link the filesystem's <id> index to the
-        # index in the array. If a solution is to be
-        # devised, it has to be on the JS side.
-        # Maybe send IDs/Filenames along with the data?
+        # This class should no longer derive from
+        # ListableView since it no longer requires
+        # the self.index_data() function!
 
-        allFiles = self.index_data(True, DeleteableView.data_root + self.path)
-        print(allFiles)
-        print(id)
-
-        path = DeleteableView.data_root + self.path + "/" + str(allFiles[int(id)])
+        path = DeleteableView.data_root + self.path + "/" + id
 
         try:
             rmtree(path)

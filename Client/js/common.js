@@ -1,6 +1,5 @@
 import * as elements from "../templates/elements.js";
 import * as containers from "../templates/containers.js";
-import * as utils from "../../Public/js/utils.js";
 
 const { Tag, Attribute, Injector} = require("@54696d654a6f6c74/html-injector");
 const _ = require("lodash");
@@ -86,6 +85,9 @@ export function generateInputs(inputTitles, inputClasses, submitFunc, inputConte
         let input = _.cloneDeep(classToElementType[htmlClass]);
         input[0].content = title;
         input[1].atribs.push(new Attribute("class", htmlClass));
+
+        console.log(contnet);
+
         if(contnet != undefined)
             input[1].atribs.push(new Attribute("value", contnet));
 
@@ -96,6 +98,7 @@ export function generateInputs(inputTitles, inputClasses, submitFunc, inputConte
     {
         if(inputClasses.length == inputTitles.length)
         {
+            console.log(inputContents);
             for(let i = 0; i < inputClasses.length; i++)
             {
                 // This check is naive!
@@ -104,6 +107,10 @@ export function generateInputs(inputTitles, inputClasses, submitFunc, inputConte
                 createInput(inputTitles[i], inputClasses[i], inputContents[i]);
 
                 Injector.injectHTML(input, "inputs");
+
+                // Update the injector so this isn't necessary
+                if(document.getElementById("md") != undefined && inputContents[i] != undefined)
+                    document.getElementById("md").value = inputContents[i];
             }
         }
         else throw "Both array lengths must match!";
@@ -119,21 +126,20 @@ export function generateInputs(inputTitles, inputClasses, submitFunc, inputConte
     };
 }
 
-export async function injectHeaders(headers, target, funcName, href)
+export function injectHeaders(data, target, funcName, writer, href)
 {
     // I can now add a button for the user to change the sorting.
-    // By default no sorting is used for best performance
-    headers = await headers;
-    let indecies = await utils.getNewsPart("indecies");
+    // By default sorting is used for most convinience
 
     document.getElementById(target).innerHTML = "";
 
-    for(let i = 0; i < headers.length; i++)
+    for(let i = 0; i < data.headers.length; i++)
     {   
-        let header = JSON.parse(headers[i]);
+        let header = JSON.parse(data.headers[i]);
+
         if(href != undefined)
-            writeElements(target, header.title, funcName, indecies[i], href);       
-        else writeElements(target, header.title, funcName, indecies[i]);       
+            writer(header, target, funcName, data.indecies[i], href);
+        else writer(header, target, funcName, data.indecies[i]);
     }
 }
 

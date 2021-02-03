@@ -10,9 +10,10 @@ function displayContacts(contacts)
 {
     for(let i = 0; i < contacts.length; i++)
     {
-        document.getElementById("contacts").innerHTML += "<p> Име: " + contacts[i].name + "</p>";
-        document.getElementById("contacts").innerHTML += "<p> Номер: " + contacts[i].number + "</p><hr>";
+        let contact = JSON.parse(contacts[i])
+        document.getElementById("contacts").innerHTML += "<p> Име: " + contact.name + "</p>";
+        document.getElementById("contacts").innerHTML += "<p> Номер: " + contact.number + "</p><hr>";
     }
 }
 
-getContacts().then((contacts) => displayContacts(contacts));
+getContacts().then((contacts) => displayContacts(contacts.headers));

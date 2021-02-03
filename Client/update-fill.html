@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8" />
+
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <link rel="stylesheet" href="../css/style.css" />
+
+        <script defer type="module" src="./js/update-fill.js"></script>
+        
+    </head>
+    <body>
+
+        <script defer type="module">
+            import { writeNav } from "./js/navigator.js";
+
+            writeNav(["main-select.html"]);
+        </script>
+
+        <div id="inputs">
+
+        </div>
+    
+        <button onclick="submit()">Submit</button>
+        <script defer>
+            const md = require("markdown").markdown;
+
+            function sendRequest(target, data)
+            {
+                fetch("http://127.0.0.1:5000/news/" + localStorage["updateArticle"] + "/" + target, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => {console.log("Done, response: " + res)})
+            }
+
+            function submit()
+            {
+                let title = document.getElementById("news-title").value;
+                let author = document.getElementById("news-author").value;
+
+                const header = {
+                    title: title,
+                    author: author,
+                    date: new Date().toLocaleString()
+                }
+                const content = {
+                    fill: md.toHTML(document.getElementById("news-content").value)
+                }
+
+                sendRequest("header", header);
+                sendRequest("content", content);
+            }
+        </script>
+    <!--
+        Seems as thought this retarded language does not allow
+        modules to be referenced by "onclick" events from HTML.
+        So I cannot have deleteNewsArticle() in delete-news.js,
+        because it's a module... Maybe find a way around this?
+    -->
+    </body>
+</html>

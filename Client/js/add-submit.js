@@ -16,7 +16,7 @@ export function submit(type)
     }
 }
 
-function submitNews()
+export function submitNews()
 {
     const txtData = document.getElementsByClassName("text-input");
     const mdData = document.getElementsByClassName("md-input");
@@ -27,12 +27,19 @@ function submitNews()
         date: new Date().toLocaleString()
     }
 
+    const md_dat = {
+        md: mdData[0].value
+    };
+
     const content = {
-        md: mdData[0].value,
+        
         fill: md.toHTML(mdData[0].value)
     };
+
+    // This part can be abstracted
     const json = {
         header: header,
+        md: md_dat,
         content: content
     }
     addRequest(json);
@@ -41,6 +48,7 @@ function submitNews()
 function submitContact()
 {
     const data = document.getElementsByClassName("text-input");
+
     const json = {
         name: data[0].value,
         number: data[1].value

@@ -1,4 +1,5 @@
-import { getNewsPart } from "../../Public/js/utils.js";
+import { httpGet } from "../../Public/js/utils.js";
 import { injectHeaders } from "./common.js";
+import { headerWriter } from "./delete-news.js";
 
-injectHeaders(getNewsPart("headers"), "insert-target", "selectArticle", "update-news-fill.html");
+injectHeaders(httpGet("/" + localStorage["operationTarget"] + "/headers/sorted"), "insert-target", "selectArticle", headerWriter, "update-fill.html");

@@ -10,8 +10,9 @@ function writeNewsArticle(id, title)
 
 async function load()
 {
-    let headers = await utils.getNewsPart("headers");
-    let indecies = await utils.getNewsPart("indecies");
+    let data = await utils.httpGet("news/sorted")
+    let headers = data.headers;
+    let indecies = data.indecies;
 
     document.getElementById("news-page-main").innerHTML = "";
 

@@ -1,4 +1,3 @@
-from Views.GenericViews.UpdateableView import UpdateableView
 from Views.GenericViews.ListableView import ListableView
 
 from flask import Blueprint, request
@@ -22,9 +21,9 @@ class PostableView(ListableView):
         path = None
 
         if len(allFiles) > 0:
-            path = self.files_path + "/" + str(allFiles[len(allFiles)-1] + 1)
+            path = self.files_path + "/" + str(allFiles[len(allFiles) - 1] + 1)
         else:
-            path = self.files_path + "1"
+            path = self.files_path + "/1"
 
         print(path)
 

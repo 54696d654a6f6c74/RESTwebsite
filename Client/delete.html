@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link rel="stylesheet" href="../css/style.css" />
 
-        <script defer type="module" src="./js/delete-news.js"></script>
+        <script defer type="module" src="./js/delete.js"></script>
         
     </head>
     <body>
@@ -30,9 +30,13 @@
         <script defer>
             async function selectArticle(id)
             {
-                await fetch("http://127.0.0.1:5000/news/" + id,
+                await fetch("http://127.0.0.1:5000/" + localStorage["operationTarget"] + "/" + id,
                 {
-                    method: "DELETE"
+                    method: "DELETE",
+                    //headers: {
+                    //    "Content-Type": "application/json"
+                    //},
+                    //body: JSON.stringify({index: id})
                 });
                 location.reload();
             }
