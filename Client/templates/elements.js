@@ -90,12 +90,6 @@ new Tag("div", [
         new Attribute("class", "ribbon-button"),
         new Attribute("onclick", "insertModifier('line')"),
         new Attribute("value", "-")
-    ]),
-    new Tag("input", "", [
-        new Attribute("type", "button"),
-        new Attribute("class", "ribbon-button"),
-        new Attribute("onclick", "mdPreview()"),
-        new Attribute("value", "P")
     ])
 ], [new Attribute ("id", "ribbon")])
 

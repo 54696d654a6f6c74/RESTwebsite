@@ -61,6 +61,10 @@ function mdPreview(){
         document.getElementById("md-input").style.cssText = "display: none;";
         document.getElementById("md-preview").style.cssText = "display: block;";
     }
-    document.getElementById("md-preview").contentWindow.document.body.innerHTML = " ";
-    document.getElementById("md-preview").contentWindow.document.write(md.toHTML(document.getElementById("md-input").value));
+    if (document.getElementById("md-preview").contentWindow.document.body != null) {
+        document.getElementById("md-preview").contentWindow.document.body.innerHTML = " ";
+    }
+    var mdTextInput = document.getElementById("md-input").value;
+    document.getElementById("md-preview").contentWindow.document.write("<link rel=\"stylesheet\" href=\"../css/style.css\" />");
+    document.getElementById("md-preview").contentWindow.document.write(md.toHTML(mdTextInput));
 }
