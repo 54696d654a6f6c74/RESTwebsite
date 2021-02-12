@@ -1,5 +1,6 @@
 import * as elements from "../templates/elements.js";
 import * as containers from "../templates/containers.js";
+import { News } from "./DataTypes/news.js";
 
 const { Tag, Attribute, Injector} = require("@54696d654a6f6c74/html-injector");
 const _ = require("lodash");
@@ -74,56 +75,53 @@ export function generateNav(tars, backButton = true)
 }
 
 // This could be refactored further
-export function generateInputs(inputTitles, inputClasses, submitFunc, inputContents){
+export function generateInputs(inputTitles, inputClasses, submitFunc){
     let classToElementType = {
         "text-input": elements.textInput,
         "md-input": elements.mdInput
     }
 
-    function createInput(title, htmlClass, contnet)
+    function createInput(title, htmlClass)
     {
         let input = _.cloneDeep(classToElementType[htmlClass]);
         input[0].content = title;
-        input[1].atribs.push(new Attribute("class", htmlClass));
-
-        console.log(contnet);
-
-        if(contnet != undefined)
-            input[1].atribs.push(new Attribute("value", contnet));
+        input[1].atribs.push(new Attribute("id", title.toLowerCase()));
 
         return input;
     }
 
+    let inputs;
+
     if(Array.isArray(inputClasses) && Array.isArray(inputTitles))
     {
+        inputs = [];
         if(inputClasses.length == inputTitles.length)
         {
-            console.log(inputContents);
             for(let i = 0; i < inputClasses.length; i++)
             {
-                // This check is naive!
-                let input = inputContents == undefined ? 
-                createInput(inputTitles[i], inputClasses[i], undefined) : 
-                createInput(inputTitles[i], inputClasses[i], inputContents[i]);
+                let input = createInput(inputTitles[i], inputClasses[i]);
+                inputs.push(input);
 
-                Injector.injectHTML(input, "inputs");
-
-                // Update the injector so this isn't necessary
-                if(document.getElementById("md") != undefined && inputContents[i] != undefined)
-                    document.getElementById("md").value = inputContents[i];
+                // Injector.bindHTML(input, "inputs");
             }
         }
         else throw "Both array lengths must match!";
     }
     else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles) && !Array.isArray(inputElement))
-        Injector.injectHTML(createInput(inputTitles, inputIDs, inputContents, inputElement), "inputs");
+    {
+        inputs = createInput(inputTitles, inputIDs, inputContents, inputElement);
+        // Injector.bindHTML(inputs, "inputs");
+    }
     else throw "Both arguments must either be arrays or non-arrays!";
     
-    // Ensures that the event will be 
-    // linked properly and on time
+    // Link the onclick because modules
+    // are unable to link to module functions
+    // without this.
     window.onload = () => {
         document.getElementById("submit").addEventListener("click", submitFunc);
     };
+
+    return inputs;
 }
 
 export function injectHeaders(data, target, funcName, writer, href)

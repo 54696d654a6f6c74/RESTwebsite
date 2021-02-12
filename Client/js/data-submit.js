@@ -1,22 +1,19 @@
-import { addRequest } from "./common.js";
-
 const md = require("markdown").markdown;
 
-export function submit(type)
+export function submit(dataType, request)
 {
-    switch(type)
+    switch(dataType)
     {
-        case 'news':
-            submitNews();
+        case "news":
+            submitRequest(request, newsData())
         break;
-        
-        case 'contacts':
-            submitContact();
+        case "contacts":
+            submitRequest(request, contactData())
         break;
     }
 }
 
-export function submitNews()
+function newsData()
 {
     const txtData = document.getElementsByClassName("text-input");
     const mdData = document.getElementsByClassName("md-input");
@@ -42,17 +39,33 @@ export function submitNews()
         md: md_dat,
         content: content
     }
-    addRequest(json);
+
+    return json;
 }
 
-function submitContact()
+function contactData()
 {
     const data = document.getElementsByClassName("text-input");
 
-    const json = {
+    const contact = {
         name: data[0].value,
         number: data[1].value
-    }
+    };
 
-    addRequest(json);
+    const json = {
+        details: contact
+    };
+
+    return json;
+}
+
+function submitRequest(reqType, data)
+{
+    fetch("http://127.0.0.1:5000/" + localStorage["operationTarget"], {
+        method: reqType,
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    }).then(res => {console.log("Done, response: " + res)})
 }
