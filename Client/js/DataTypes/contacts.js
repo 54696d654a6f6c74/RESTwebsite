@@ -1,4 +1,5 @@
 import { DataType } from "./data-type.js";
+import { httpGet } from "../../../Public/js/utils.js";
 
 export class Contacts extends DataType
 {
@@ -28,5 +29,18 @@ export class Contacts extends DataType
         this.data = json;
 
         this.sendSubmitRequest(reqType)
+    }
+
+    async getDataFromServer()
+    {
+        let id = localStorage["updateArticle"];
+        let info = await httpGet(localStorage["operationTarget"] + "/" + id + "/details");
+        info = JSON.parse(info);
+
+        const retrived = [];
+        retrived.push(info.name);
+        retrived.push(info.number);
+
+        return retrived
     }
 }

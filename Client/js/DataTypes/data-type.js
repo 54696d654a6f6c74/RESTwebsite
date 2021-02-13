@@ -31,6 +31,23 @@ export class DataType
         throw Error("Cannot call this fucntion from a base class");
     }
 
+    async getDataFromServer()
+    {
+        throw Error("Cannot call this function from a base class");
+    }
+
+    async writeServerData()
+    {
+        const serverData = await this.getDataFromServer();
+        let counter = 0;
+
+        for(const input in this.inputStrcture)
+        {
+            document.getElementById(input.toLocaleLowerCase()).value = serverData[counter];
+            counter++;
+        }
+    }
+
     getDataFromInputs()
     {
         let data = [];

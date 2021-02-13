@@ -1,4 +1,5 @@
 import { DataType } from "./data-type.js";
+import { httpGet } from "../../../Public/js/utils.js";
 
 const md = require("markdown").markdown;
 
@@ -42,5 +43,23 @@ export class News extends DataType
         this.data = json;
 
         this.sendSubmitRequest(reqType);
+    }
+
+    async getDataFromServer()
+    {
+        let id = localStorage["updateArticle"];
+        let info = await httpGet(localStorage["operationTarget"] + "/" + id + "/header");
+        info = JSON.parse(info);
+
+        const retrived = [];
+        retrived.push(info.title);
+        retrived.push(info.author);
+
+        info = await httpGet(localStorage["operationTarget"] + "/" + id + "/md");
+        info = JSON.parse(info);
+
+        retrived.push(info.md);
+
+        return retrived;
     }
 }

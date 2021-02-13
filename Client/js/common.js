@@ -1,6 +1,5 @@
 import * as elements from "../templates/elements.js";
 import * as containers from "../templates/containers.js";
-import { News } from "./DataTypes/news.js";
 
 const { Tag, Attribute, Injector} = require("@54696d654a6f6c74/html-injector");
 const _ = require("lodash");
@@ -101,17 +100,12 @@ export function generateInputs(inputTitles, inputClasses, submitFunc){
             {
                 let input = createInput(inputTitles[i], inputClasses[i]);
                 inputs.push(input);
-
-                // Injector.bindHTML(input, "inputs");
             }
         }
         else throw "Both array lengths must match!";
     }
     else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles) && !Array.isArray(inputElement))
-    {
         inputs = createInput(inputTitles, inputIDs, inputContents, inputElement);
-        // Injector.bindHTML(inputs, "inputs");
-    }
     else throw "Both arguments must either be arrays or non-arrays!";
     
     // Link the onclick because modules
