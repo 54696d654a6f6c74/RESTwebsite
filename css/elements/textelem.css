@@ -15,6 +15,9 @@
     min-height: 125px;
     width: 100%;
     height:100%;
+    border-radius: 10px;
+}
+#md-input{
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
@@ -22,10 +25,24 @@
     outline: none;
     resize: none;
     font-size: 1rem;
-    border-radius: 10px;
+    width: 99%;
+    padding:1%;
+    border:none;
+}
+#md-preview{
+    /* kinda fixed, height bobbing still happens */
+    min-height: calc(24rem + 1px);
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border-color: #fff;
 }
 #inputs{
     width: 35%;
     margin-left: auto;
     margin-right: auto;
+}
+#ribbon{
+    margin-top: 25px;
+    background-color: #393e46;
 }
