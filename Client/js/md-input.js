@@ -53,18 +53,18 @@ function insertModifier(action) {
     }
 }
 function mdPreview(){
-    if (document.getElementById("md-input").style.cssText == "display: none;") {
-        document.getElementById("md-input").style.cssText = "display: block;";
+    if (document.getElementsByName("main-md")[0].style.cssText == "display: none;") {
+        document.getElementsByName("main-md")[0].style.cssText = "display: block;";
         document.getElementById("md-preview").style.cssText = "display: none;";
     }
     else {
-        document.getElementById("md-input").style.cssText = "display: none;";
+        document.getElementsByName("main-md")[0].style.cssText = "display: none;";
         document.getElementById("md-preview").style.cssText = "display: block;";
     }
     if (document.getElementById("md-preview").contentWindow.document.body != null) {
         document.getElementById("md-preview").contentWindow.document.body.innerHTML = " ";
     }
-    var mdTextInput = document.getElementById("md-input").value;
+    var mdTextInput = document.getElementsByName("main-md")[0].value;
     document.getElementById("md-preview").contentWindow.document.write("<link rel=\"stylesheet\" href=\"../css/style.css\" />");
     document.getElementById("md-preview").contentWindow.document.write(md.toHTML(mdTextInput));
 }

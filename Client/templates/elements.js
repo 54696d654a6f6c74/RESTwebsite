@@ -22,9 +22,11 @@ export const mdInput =
 [
 new Tag("h3", "", []),
 new Tag("textarea", "", [
+    new Attribute ("name", "main-md"),
     new Attribute ("class", "md-input"),
     new Attribute ("rows", "20"),
 ]),
+
 new Tag("iframe", "", [
     new Attribute ("class", "md-input"),
     new Attribute ("id", "md-preview"),
