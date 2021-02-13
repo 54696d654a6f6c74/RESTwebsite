@@ -23,8 +23,7 @@ export const mdInput =
 new Tag("h3", "", []),
 new Tag("textarea", "", [
     new Attribute ("class", "md-input"),
-    new Attribute ("id", "md-input"),
-    new Attribute ("rows", "20")
+    new Attribute ("rows", "20"),
 ]),
 new Tag("iframe", "", [
     new Attribute ("class", "md-input"),
@@ -92,5 +91,4 @@ new Tag("div", [
         new Attribute("value", "-")
     ])
 ], [new Attribute ("id", "ribbon")])
-
 ];

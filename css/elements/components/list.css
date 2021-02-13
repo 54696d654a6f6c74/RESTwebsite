@@ -1,0 +1,13 @@
+/* list item */
+.list-item{
+    text-align: left;
+    padding: .85vh;
+    font-size: 1.5em;
+    color: #eeeeee;
+    text-decoration: none;
+    display: block;
+    border-bottom: 2px solid #393e46;
+}
+.list-item:hover{
+    background-color: #d65a31;
+}

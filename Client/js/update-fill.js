@@ -1,28 +1,12 @@
-import { generateInputs } from "./common.js";
-import { getNewsPart } from "../../Public/js/utils.js";
+import { getDataType } from "./DataTypes/mapper.js";
 
-let header = []
+const injector = require("@54696d654a6f6c74/html-injector").Injector;
 
-async function fillHeader()
-{
-    let id = localStorage["updateArticle"];
-    let info = await getNewsPart("header", id);
+const request = "PUT";
 
-    header.push(info.title);
-    header.push(info.author);
+const inputFields = getDataType();
+const generatedFields = inputFields.generateInputs(request);
 
-    info = await getNewsPart("content/md", id);
-    header.push(info.md);
-}
+injector.bindHTML(generatedFields, "inputs");
 
-async function load()
-{
-    await fillHeader();
-    generateInputs(
-    ["Title", "Author", "Content"], 
-    ["news-title", "news-author", "news-content"],
-    header
-    );
-}
-
-load();
+inputFields.writeServerData();
