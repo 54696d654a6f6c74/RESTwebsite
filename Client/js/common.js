@@ -84,7 +84,7 @@ export function generateInputs(inputTitles, inputClasses, submitFunc){
     {
         let input = _.cloneDeep(classToElementType[htmlClass]);
         input[0].content = title;
-        input[1].atribs.push(new Attribute("id", title.toLowerCase()));
+        input[1].atribs.push(new Attribute("idkek", title.toLowerCase()));
 
         return input;
     }
