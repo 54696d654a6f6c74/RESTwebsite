@@ -1,6 +1,5 @@
 import * as elements from "../templates/elements.js";
 import * as containers from "../templates/containers.js";
-import * as utils from "../../Public/js/utils.js";
 
 const { Tag, Attribute, Injector} = require("@54696d654a6f6c74/html-injector");
 const _ = require("lodash");
@@ -75,65 +74,64 @@ export function generateNav(tars, backButton = true)
 }
 
 // This could be refactored further
-export function generateInputs(inputTitles, inputClasses, submitFunc, inputContents){
+export function generateInputs(inputTitles, inputClasses, submitFunc){
     let classToElementType = {
         "text-input": elements.textInput,
         "md-input": elements.mdInput
     }
 
-    function createInput(title, htmlClass, contnet)
+    function createInput(title, htmlClass)
     {
         let input = _.cloneDeep(classToElementType[htmlClass]);
         input[0].content = title;
-        input[1].atribs.push(new Attribute("class", htmlClass));
-        if(contnet != undefined)
-            input[1].atribs.push(new Attribute("value", contnet));
+        input[1].atribs.push(new Attribute("idkek", title.toLowerCase()));
 
         return input;
     }
 
+    let inputs;
+
     if(Array.isArray(inputClasses) && Array.isArray(inputTitles))
     {
+        inputs = [];
         if(inputClasses.length == inputTitles.length)
         {
             for(let i = 0; i < inputClasses.length; i++)
             {
-                // This check is naive!
-                let input = inputContents == undefined ? 
-                createInput(inputTitles[i], inputClasses[i], undefined) : 
-                createInput(inputTitles[i], inputClasses[i], inputContents[i]);
-
-                Injector.injectHTML(input, "inputs");
+                let input = createInput(inputTitles[i], inputClasses[i]);
+                inputs.push(input);
             }
         }
         else throw "Both array lengths must match!";
     }
     else if(!Array.isArray(inputIDs) && !Array.isArray(inputTitles) && !Array.isArray(inputElement))
-        Injector.injectHTML(createInput(inputTitles, inputIDs, inputContents, inputElement), "inputs");
+        inputs = createInput(inputTitles, inputIDs, inputContents, inputElement);
     else throw "Both arguments must either be arrays or non-arrays!";
     
-    // Ensures that the event will be 
-    // linked properly and on time
+    // Link the onclick because modules
+    // are unable to link to module functions
+    // without this.
     window.onload = () => {
         document.getElementById("submit").addEventListener("click", submitFunc);
     };
+
+    return inputs;
 }
 
-export async function injectHeaders(headers, target, funcName, href)
+export function injectHeaders(data, target, funcName, writer, href)
 {
     // I can now add a button for the user to change the sorting.
-    // By default no sorting is used for best performance
-    headers = await headers;
-    let indecies = await utils.getNewsPart("indecies");
+    // By default sorting is used for most convinience
 
     document.getElementById(target).innerHTML = "";
 
-    for(let i = 0; i < headers.length; i++)
+    for(let i = 0; i < data.headers.length; i++)
     {   
-        let header = JSON.parse(headers[i]);
+        let header = JSON.parse(data.headers[i]);
+
         if(href != undefined)
-            writeElements(target, header.title, funcName, indecies[i], href);       
-        else writeElements(target, header.title, funcName, indecies[i]);       
+            writer(header, target, funcName, data.indecies[i], href);
+        else writer(header, target, funcName, data.indecies[i]);
     }
 }
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8" />
+
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <link rel="stylesheet" href="../css/style.css" />
+
+        <script defer type="module" src="./js/update.js"></script>
+        
+    </head>
+    <body>
+        
+        <script defer type="module">
+            import { writeNav } from "./js/navigator.js";
+            writeNav(["main-select.html"]);
+        </script>
+
+        <div class="article-wrapper" id="insert-target">
+
+        </div >
+    
+        <script defer>
+            function selectArticle(id)
+            {
+                localStorage["updateArticle"] = id;
+            }
+        </script>
+    </body>
+</html>

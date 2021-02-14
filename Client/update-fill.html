@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
+        
+        <meta charset="utf-8" />
 
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <link rel="stylesheet" href="../css/style.css" />
 
-        <script defer type="module" src="./js/add.js"></script>
-
-        <script src="./js/md-input.js"></script>
+        <script defer type="module" src="./js/update-fill.js"></script>
+        
     </head>
     
     <body>
 
         <script defer type="module">
             import { writeNav } from "./js/navigator.js";
-            
+
             writeNav(["main-select.html"]);
         </script>
 
-        <!--
-            Styling can be controlled with a css file
-            that changes size and stuff like that
-            using the ID set by the generator
-        -->
         <div id="inputs">
 
         </div>
-
+    
         <button id="submit">Submit</button>
-        <button id="preview" onclick="mdPreview()">Preview</button>
+        
+    <!--
+        Seems as thought this retarded language does not allow
+        modules to be referenced by "onclick" events from HTML.
+        So I cannot have deleteNewsArticle() in delete-news.js,
+        because it's a module... Maybe find a way around this?
+    -->
     </body>
 </html>

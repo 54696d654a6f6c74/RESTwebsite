@@ -1,0 +1,10 @@
+.menu{
+    order: 2;
+    position: sticky;
+    width: 30%;
+    height: 100%;
+    right: 0;
+    width: 25%;
+    bottom: 25%;
+    top: 25%;
+}

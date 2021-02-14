@@ -1,25 +1,10 @@
-import { generateInputs } from "./common.js";
-import { submit } from "./add-submit.js";
+import { getDataType } from "./DataTypes/mapper.js";
 
-const _ = require("lodash");
+const injector = require("@54696d654a6f6c74/html-injector").Injector;
 
-require("@54696d654a6f6c74/html-injector").Injector.injectHTML;
+const request = "POST";
 
-switch(localStorage["operationTarget"])
-{
-    case 'news':
-        generateInputs(
-            ["Title", "Author", "Content"], 
-            ["text-input", "text-input", "md-input"], 
-            () => submit("news")
-        );
-    break;
-    
-    case 'contacts':
-        generateInputs(
-            ["Names", "Phone number"], 
-            ["text-input", "text-input"], 
-            () => submit("contacts")
-        );
-    break;
-}
+let inputFields = getDataType();
+inputFields = inputFields.generateInputs(request);
+
+injector.bindHTML(inputFields, "inputs");

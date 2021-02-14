@@ -24,7 +24,7 @@ bind(app,
      "/news",
      file_path="/{}/header.json",
      path="/news",
-     files=["header.json", "content.json"])
+     files=["header.json", "content.json", "md.json"])
 
 
 bind(app,

@@ -12,10 +12,10 @@ class ListableView(BindableView):
     def __init__(self, sorted, path, files_path):
         self.sorted = sorted
         self.path = path
-        self.filies_path = files_path
+        self.files_path = files_path
 
-    def index_data(self, sortFiles):
-        files = map(int, listdir(self.filies_path))
+    def index_data(self, sortFiles, path):
+        files = map(int, listdir(path))
 
         if sortFiles:
             return sorted(files)
@@ -33,30 +33,32 @@ class ListableView(BindableView):
         return headers
 
     def get_header_data(self, sortHeaders=True):
-        allHeaders = self.index_data(sortHeaders)
+        allHeaders = self.index_data(sortHeaders, self.files_path)
 
         return self.iterate_data(allHeaders)
 
     def dispatch_request(self):
-        return dumps(self.get_header_data(self.sorted))
+        data = {
+                "headers": self.get_header_data(self.sorted),
+                "indecies": list(self.index_data(self.sorted, self.files_path))
+               }
+        return dumps(data)
 
     def bind(bp: Blueprint, view_type: BindableView, file_path, path, **extras):
-        bp.add_url_rule(
-                        "",
-                        view_func=view_type.as_view(path,
-                                                    sorted=False,
-                                                    path=view_type.data_root + path + file_path,
-                                                    files_path=view_type.data_root + path,
-                                                    **extras)
+        bp.add_url_rule("",
+            view_func=view_type.as_view(path,
+                sorted=False,
+                path=view_type.data_root + path + file_path,
+                files_path=view_type.data_root + path,
+                **extras)
         )
 
-        bp.add_url_rule(
-                        "/sorted",
-                        view_func=view_type.as_view(path+"/sorted",
-                                                    sorted=True,
-                                                    path=view_type.data_root + path + file_path,
-                                                    files_path=view_type.data_root + path,
-                                                    **extras)
+        bp.add_url_rule("/sorted",
+            view_func=view_type.as_view(path + "/sorted",
+                sorted=True,
+                path=view_type.data_root + path + file_path,
+                files_path=view_type.data_root + path,
+                **extras)
         )
 
         return True
