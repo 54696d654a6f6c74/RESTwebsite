@@ -5,18 +5,22 @@ function insertModifier(action) {
     var selectionText = addTextArea.value.substring(addTextArea.selectionStart, addTextArea.selectionEnd);
     var beginningToSelectionText = addTextArea.value.substring(0, addTextArea.selectionStart);
     var selectionTextToEnd = addTextArea.value.substring(addTextArea.selectionEnd);
+
     switch (action) {
         case 'bold':
             addTextArea.value = beginningToSelectionText + "**" + selectionText + "**" + selectionTextToEnd;
-            break;
+        break;
+
         case 'italic':
             addTextArea.value = beginningToSelectionText + "*" + selectionText + "*" + selectionTextToEnd;
-            break;
+        break;
+
         case 'heading':
             addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
             + "\n# " + 
                 addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
-            break;
+        break;
+
         case 'codeBlock':
             // override selectionText with line start and end
             beginningToSelectionText = addTextArea.value.substring(0, 
@@ -24,32 +28,35 @@ function insertModifier(action) {
             selectionText = addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", 
                 addTextArea.selectionStart) + 1, addTextArea.selectionEnd);
             addTextArea.value = beginningToSelectionText + "```\n" + selectionText + "\n```" + selectionTextToEnd;
-            break;
+        break;
+
         case 'bulletList':
             addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
             + "\n* " + 
                 addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
         break;
+
         case 'numberList':
             addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
                 + "\n?. " + 
                 addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
             addTextArea.focus();
             addTextArea.selectionEnd = addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1;
-            break;
+        break;
+
         case 'quote':
             addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
             + "\n> " + 
                 addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
-                break;
+        break;
+
         case 'hyperlink':
             addTextArea.value = beginningToSelectionText + "[" + selectionText + "](link)" + selectionTextToEnd;
-            break;
+        break;
+
         case 'line':
             addTextArea.value = beginningToSelectionText + "\n---\n" + selectionText + selectionTextToEnd;
-            break;
-        default:
-            break;
+        break;
     }
 }
 function mdPreview(){

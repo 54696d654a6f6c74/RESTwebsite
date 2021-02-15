@@ -26,7 +26,6 @@ bind(app,
      path="/news",
      files=["header.json", "content.json", "md.json"])
 
-
 bind(app,
      "contacts",
      ContactsView,

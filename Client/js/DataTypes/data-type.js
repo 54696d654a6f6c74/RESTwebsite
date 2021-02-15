@@ -43,7 +43,8 @@ export class DataType
 
         for(const input in this.inputStrcture)
         {
-            document.getElementById(input.toLocaleLowerCase()).value = serverData[counter];
+            console.log(input);
+            document.getElementById(input.toLowerCase()).value = serverData[counter];
             counter++;
         }
     }

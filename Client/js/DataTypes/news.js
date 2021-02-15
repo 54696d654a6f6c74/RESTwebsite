@@ -17,7 +17,6 @@ export class News extends DataType
 
     submit(reqType)
     {
-        console.log("Called");
         const inputData = this.getDataFromInputs();
 
         const header = {
