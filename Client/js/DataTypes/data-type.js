@@ -60,7 +60,11 @@ export class DataType
 
     sendSubmitRequest(reqType)
     {
-        fetch("http://127.0.0.1:5000/" + this.typename, {
+        let path = this.typename;
+        if (reqType == 'PUT')
+            path += "/" + localStorage["updateArticle"];
+
+        fetch("http://127.0.0.1:5000/" + path, {
             method: reqType,
             headers: {
                 "Content-Type": "application/json"

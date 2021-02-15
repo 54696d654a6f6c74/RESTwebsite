@@ -2,6 +2,7 @@ from Views.GenericViews.IndexableView import IndexableView
 from Views.GenericViews.BindableView import BindableView
 
 from flask import Blueprint, request
+from json import dumps
 
 
 class UpdateableView(IndexableView):
@@ -18,9 +19,9 @@ class UpdateableView(IndexableView):
 
         for file in self.files:
             filename = file[:-5]
-            data_to_write = data[filename]
+            data_to_write = dumps(data[filename])
 
-            path = self.path + "/" + file
+            path = self.path + "/" + id + "/" + file
 
             writer = open(self.data_root + path, "w")
             writer.write(data_to_write)
