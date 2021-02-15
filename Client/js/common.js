@@ -127,7 +127,7 @@ export function injectHeaders(data, target, funcName, writer, href)
 
     for(let i = 0; i < data.headers.length; i++)
     {   
-        let header = JSON.parse(data.headers[i]);
+        let header = data.headers[i];
 
         if(href != undefined)
             writer(header, target, funcName, data.indecies[i], href);
