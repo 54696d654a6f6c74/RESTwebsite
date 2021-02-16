@@ -10,6 +10,10 @@
     border-radius: 10px;
     outline: none;
 }
+#inputs h3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .md-input{
     min-width: 255px;
     min-height: 125px;

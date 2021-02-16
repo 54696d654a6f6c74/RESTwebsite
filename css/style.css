@@ -32,7 +32,7 @@ body{
     margin-top: 20px;
 } /* flexbox layout rules */
 
-#page-main{
+#main-page{
     display: flex;
     flex-flow: row;
 }
@@ -74,6 +74,7 @@ p {
         flex-flow: column;
     }
     .menu{
+        
         margin-top: 15px;
         left: 0;
         position: inherit;

@@ -57,20 +57,20 @@ new Tag("div", [
         new Attribute("type", "button"),
         new Attribute("class", "ribbon-button"),
         new Attribute("onclick", "insertModifier('bulletList')"),
-        new Attribute("value", "&colone;")
+        new Attribute("value", "≔")
     ]),
     new Tag("input", "", [
         new Attribute("type", "button"),
         new Attribute("class", "ribbon-button"),
         new Attribute("onclick", "insertModifier('numberList')"),
-        new Attribute("value", "&#8562;")
+        new Attribute("value", "ⅲ")
     ]),
     new Tag("input", "", [
         new Attribute("type", "button"),
         new Attribute("class", "ribbon-button"),
         new Attribute("style", "font-weight: bold;"),
         new Attribute("onclick", "insertModifier('quote')"),
-        new Attribute("value", "&rdquo;")
+        new Attribute("value", "”")
     ]),
     new Tag("input", "", [
         new Attribute("type", "button"),
@@ -84,7 +84,7 @@ new Tag("div", [
         new Attribute("class", "ribbon-button"),
         new Attribute("style", "font-family: monospace, monospace;"),
         new Attribute("onclick", "insertModifier('hyperlink')"),
-        new Attribute("value", "&#9939;")
+        new Attribute("value", "⛓")
     ]),
     new Tag("input", "", [
         new Attribute("type", "button"),

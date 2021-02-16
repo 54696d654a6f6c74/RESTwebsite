@@ -27,6 +27,9 @@ button{
     padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
+    border-radius: 10px;
+    border-color: #fff;
+    border-width: 10px 10px 10px 10px;
 }
 button#submit{
     font-size: 2em;
@@ -36,13 +39,14 @@ button#submit{
     height: fit-content;
     font-weight: bold;
     margin: 0;
+    right: 0;
 }
 button#preview{
     font-size: 2em;
     position: fixed;
     top: 90%;
     width: 30%;
-    right: 0;
+    left: 0;
     height: fit-content;
     font-weight: bold;
     margin: 0;
