@@ -1,3 +1,5 @@
+from flask import Blueprint # , Response
+
 from json import loads
 
 
@@ -20,11 +22,22 @@ class Indexable:
 
         return data_dict
 
-    def get_data_for_item(self, index: int, filename: str) -> dict:
-        io_file = open(f"{self.path}/{str(index)}/{filename}.json", "r")
+    def get_data_for_item(self, index: int, file_name: str) -> dict:
+        io_file = open(f"{self.path}/{str(index)}/{file_name}.json", "r")
 
         data = loads(io_file.read())
 
         io_file.close()
 
         return data
+
+    def bind(self, bp: Blueprint):
+        bp.add_url_rule("/<int:index>",
+            view_func = self.get_data_for_index,
+            methods = ['GET']
+        ),
+
+        bp.add_url_rule("/<int:index>/<string:file_name>",
+            view_func = self.get_data_for_item,
+            methods = ['GET']
+        )

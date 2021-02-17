@@ -1,5 +1,7 @@
 from Behavior.Indexable import Indexable
 
+from flask import Blueprint
+
 from shutil import rmtree
 
 
@@ -8,3 +10,9 @@ class Deleteable(Indexable):
         path = f"{self.path}/{str(index)}"
 
         rmtree(path)
+
+    def bind(self, bp: Blueprint):
+        bp.add_url_rule("/<int:index>",
+            view_func = self.delete_folder,
+            methods = ['DELETE']
+        )

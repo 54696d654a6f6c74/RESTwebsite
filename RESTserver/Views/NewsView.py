@@ -1,12 +1,14 @@
+from Behavior.Indexable import Indexable
+from Behavior.Listable import Listable
+
 from Behavior.Postable import Postable
 from Behavior.Deleteable import Deleteable
 from Behavior.Updateable import Updateable
 
-from flask.views import MethodView
-from flask import request, Response
+from flask import request, Response, Blueprint
 
 
-class NewsView(Postable, Deleteable, Updateable, MethodView):
+class NewsView(Postable, Deleteable, Updateable):
     def __init__(self, path: str, files: [], header_file_name: str):
         Postable.__init__(self, path, files, header_file_name)
         Deleteable.__init__(self, path, files)
@@ -15,16 +17,8 @@ class NewsView(Postable, Deleteable, Updateable, MethodView):
     def get(self, id: int, sort: bool, file_name: str):
         if id is None and file_name is None:
             return self.get_header_data(sort)
-        elif file_name is None:
-            try:
-                return self.get_data_for_index(id)
-            except FileNotFoundError:
-                return Response(status = 404)
         else:
-            try:
-                return self.get_data_for_item(id, file_name)
-            except FileNotFoundError:
-                return Response(status = 404)
+            return Indexable.get(self, id, file_name)
 
     def post(self):
         data = request.get_json()
@@ -49,3 +43,10 @@ class NewsView(Postable, Deleteable, Updateable, MethodView):
             self.update_file(data, file_name, id)
 
         return Response(status = 200)
+
+    def bind(self, bp: Blueprint):
+        Indexable.bind(self, bp)
+        Listable.bind(self, bp)
+        Postable.bind(self, bp)
+        Deleteable.bind(self, bp)
+        Updateable.bind(self, bp)

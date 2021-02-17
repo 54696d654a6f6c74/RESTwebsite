@@ -1,11 +1,15 @@
 from Behavior.Listable import Listable
 
+from flask import Response, Blueprint, request
+
 from os import mkdir
 from json import dumps
 
 
 class Postable(Listable):
-    def write_data(self, data: dict):
+    def write_data(self) -> Response:
+        data = request.get_json()
+
         all_files = self.get_all_data(True)
 
         target = None
@@ -24,3 +28,11 @@ class Postable(Listable):
             writer.write(dumps(data_to_write))
 
             writer.close()
+
+        return Response(status = 201)
+
+    def bind(self, bp: Blueprint):
+        bp.add_url_rule("",
+            view_func = self.write_data,
+            methods = ['POST']
+        )

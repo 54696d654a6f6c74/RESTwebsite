@@ -1,5 +1,7 @@
 from Behavior.Indexable import Indexable
 
+from flask import Blueprint
+
 from os import listdir
 
 
@@ -30,3 +32,20 @@ class Listable(Indexable):
         }
 
         return final_data
+
+    def sorted_data(self):
+        return self.get_header_data(True)
+
+    def unsorted_data(self):
+        return self.get_header_data(False)
+
+    def bind(self, bp: Blueprint):
+        bp.add_url_rule("",
+            view_func = self.unsorted_data, # self.get_header_data(True),
+            methods = ['GET']
+        )
+
+        bp.add_url_rule("/sorted",
+            view_func = self.sorted_data, # self.get_header_data(False),
+            methods = ['GET']
+        )
