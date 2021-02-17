@@ -24,7 +24,7 @@ class Listable(Indexable):
 
         for i in data:
             header = self.get_data_for_index(i)
-            headers.append(header["header"])
+            headers.append(header[self.header_file_name])
 
         final_data = {
             "headers": headers,
