@@ -35,7 +35,6 @@ export class Contacts extends DataType
     {
         let id = localStorage["updateArticle"];
         let info = await httpGet(localStorage["operationTarget"] + "/" + id + "/details");
-        info = JSON.parse(info);
 
         const retrived = [];
         retrived.push(info.name);

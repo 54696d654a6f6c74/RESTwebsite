@@ -48,14 +48,12 @@ export class News extends DataType
     {
         let id = localStorage["updateArticle"];
         let info = await httpGet(localStorage["operationTarget"] + "/" + id + "/header");
-        info = JSON.parse(info);
 
         const retrived = [];
         retrived.push(info.title);
         retrived.push(info.author);
 
         info = await httpGet(localStorage["operationTarget"] + "/" + id + "/md");
-        info = JSON.parse(info);
 
         retrived.push(info.md);
 
