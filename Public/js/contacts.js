@@ -10,7 +10,7 @@ function displayContacts(contacts)
 {
     for(let i = 0; i < contacts.length; i++)
     {
-        let contact = JSON.parse(contacts[i])
+        let contact = contacts[i];
         document.getElementById("contacts").innerHTML += "<p> Име: " + contact.name + "</p>";
         document.getElementById("contacts").innerHTML += "<p> Номер: " + contact.number + "</p><hr>";
     }
