@@ -1,11 +1,4 @@
-import { injectHeaders } from "./common.js";
-import { httpGet } from "../../Public/js/utils.js";
-import { headerWriter } from "./delete.js"
+import { ActionMenu } from "./Navigation/MenuSystem/action-menu.js";
 
-async function load()
-{
-    let data = await httpGet(localStorage["operationTarget"] + "/sorted");
-    injectHeaders(data, "insert-target", "selectArticle", headerWriter, "update-fill.html");
-}
-
-load();
+console.log(localStorage["operationTarget"]);
+ActionMenu.load_and_render("insert-target", "update-fill.html", "selectArticle");

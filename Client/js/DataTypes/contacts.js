@@ -1,16 +1,17 @@
-import { DataType } from "./data-type.js";
+import { DataType } from "./Generic/data-type.js";
 import { httpGet } from "../../../Public/js/utils.js";
+import { textInput } from "../../templates/elements.js";
 
 export class Contacts extends DataType
 {
     constructor()
     {
         const titles = ["Names", "Phone number"];
-        const types = ["text-input", "text-input"];
+        const types = [textInput, textInput];
 
         super(titles, types);
 
-        this.typename = "contacts";
+        this.RESTroot = "contacts";
     }
 
     submit(reqType)

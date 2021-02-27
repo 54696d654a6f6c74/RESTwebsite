@@ -5,6 +5,7 @@ from flask_cors import CORS
 
 from Views.NewsView import NewsView
 from Views.ContactsView import ContactsView
+from Views.AboutView import AboutView
 
 
 app = Flask(__name__)
@@ -22,12 +23,17 @@ views = [
         "./data/contacts",
         ["details"],
         "details"
+    ),
+    AboutView(
+        "./data/aboutus",
+        "aboutus"
     )
 ]
 
 names = [
     "news",
-    "contacts"
+    "contacts",
+    "aboutus"
 ]
 
 bind(app, names, views)

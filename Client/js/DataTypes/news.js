@@ -1,5 +1,6 @@
-import { DataType } from "./data-type.js";
+import { DataType } from "./Generic/data-type.js";
 import { httpGet } from "../../../Public/js/utils.js";
+import { textInput, mdInput } from "../../templates/elements.js";
 
 const md = require("markdown").markdown;
 
@@ -8,11 +9,11 @@ export class News extends DataType
     constructor()
     {
         const titles = ["Title", "Author", "Content"];
-        const types = ["text-input", "text-input", "md-input"];
+        const types = [textInput, textInput, mdInput];
 
         super(titles, types);
 
-        this.typename = "news";
+        this.RESTroot = "news";
     }
 
     submit(reqType)

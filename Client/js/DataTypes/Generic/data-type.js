@@ -1,9 +1,10 @@
+const Attribute = require("@54696d654a6f6c74/html-injector").Attribute;
 // Maybe move this here?
-import { generateInputs } from "../common.js";
+const _ = require("lodash");
 
 export class DataType
 {
-    typename;
+    RESTroot;
     data;
     inputStrcture;
 
@@ -23,7 +24,24 @@ export class DataType
         const titles = Object.keys(this.inputStrcture);
         const types = Object.values(this.inputStrcture);
 
-        return generateInputs(titles, types, () => this.submit(request))
+        let generated_inputs = []
+
+        for(let i = 0; i < titles.length; i++)
+        {
+            let input = _.cloneDeep(types[i]);
+            
+            input[0].content = titles[i];
+            input[1].atribs.push(new Attribute("id", titles[i].toLowerCase()));
+
+            generated_inputs.push(input);
+        }
+
+        window.onload = () => {
+            document.getElementById("submit").addEventListener("click", () => this.submit(request));
+        };
+
+        // return generateInputs(titles, types, () => this.submit(request))
+        return generated_inputs;
     }
 
     submit()
@@ -58,10 +76,10 @@ export class DataType
         return data;
     }
 
-    sendSubmitRequest(reqType)
+    sendSubmitRequest(reqType, idCarrier = true)
     {
-        let path = this.typename;
-        if (reqType == 'PUT')
+        let path = this.RESTroot;
+        if (reqType == 'PUT' && idCarrier)
             path += "/" + localStorage["updateArticle"];
 
         fetch("http://127.0.0.1:5000/" + path, {
