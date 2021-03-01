@@ -2,7 +2,7 @@ import { DataType } from "./Generic/data-type.js";
 import { httpGet } from "../../../Public/js/utils.js";
 import { textInput, mdInput } from "../../templates/elements.js";
 
-const md = require("markdown").markdown;
+const md = require("marked");
 
 export class News extends DataType
 {
@@ -31,7 +31,7 @@ export class News extends DataType
         };
 
         const content = {
-            fill: md.toHTML(md_dat.md)
+            fill: md(md_dat.md)
         };
 
         const json = {

@@ -2,7 +2,7 @@ import { DataType } from "./Generic/data-type.js";
 import { httpGet } from "../../../Public/js/utils.js";
 import { mdInput } from "../../templates/elements.js";
 
-const md = require("markdown").markdown;
+const md = require("marked");
 
 export class AboutUs extends DataType
 {
@@ -25,7 +25,7 @@ export class AboutUs extends DataType
                 contnet: inputData[0]
             },
             aboutus: {
-                content: md.toHTML(inputData[0])
+                content: md(inputData[0])
             }
         }
 

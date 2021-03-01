@@ -1,4 +1,4 @@
-const md = require("markdown").markdown;
+const md = require("marked");
 // handwritten vanilla js md wysiwyg editor because dependencies are not cool
 function insertModifier(action) {
     var addTextArea = document.getElementById("md-input");
@@ -73,5 +73,5 @@ function mdPreview(){
     }
     var mdTextInput = document.getElementsByName("main-md")[0].value;
     document.getElementById("md-preview").contentWindow.document.write("<link rel=\"stylesheet\" href=\"../css/style.css\" />");
-    document.getElementById("md-preview").contentWindow.document.write(md.toHTML(mdTextInput));
+    document.getElementById("md-preview").contentWindow.document.write(md(mdTextInput));
 }
