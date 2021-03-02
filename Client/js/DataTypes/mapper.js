@@ -1,32 +1,21 @@
 // There has to be a better way of doing this...
-import { News } from "./news.js";
-import { Contacts } from "./contacts.js";
-import { AboutUs } from "./aboutus.js";
+import types from "./linker.js";
 
 export function getDataType()
 {
-    switch(localStorage["operationTarget"])
+    for(let type of Object.entries(types))
     {
-        case "news":
-            return new News();
-        case "contacts":
-            return new Contacts();
-        case "aboutus":
-            return new AboutUs();
+        if(type[0].toLowerCase()
+            == localStorage["operationTarget"])
+            return type[1];
     }
+    return undefined
 }
 
 export function getDataHeaderTitle()
 {
-    switch(localStorage["operationTarget"])
-    {
-        case "news":
-            return "title";
-        case "contacts":
-            return "name";
-        default:
-            return undefined;    
-    }
+    const type = getDataType();
+    return type.titleProperty;
 }
 
 export function getAvailableTypes(operation = undefined)
@@ -34,47 +23,48 @@ export function getAvailableTypes(operation = undefined)
     if(operation == undefined)
         operation = localStorage["operationType"];
 
-    switch(operation)
+    let available = [];
+
+    for(let type of Object.entries(types))
     {
-        case 'add':
-            return ["'news'", "'contacts'"];
-        case 'delete':
-            return ["'news'", "'contacts'"];
-        case 'update':
-            return ["'news'", "'contacts'", "'aboutus'"];
+        for(let op of type[1].availableOperations)
+        {
+            console.log(op);
+            if(op == operation)
+                available.push("'" + type[0].toLowerCase() + "'");
+        }
     }
+
+    return available
 }
 
-export function getAvailableTitles(operation = undefined)
+export function getAvailableOperations(operation = undefined)
 {
     if(operation == undefined)
         operation = localStorage["operationType"];
+
+        let available = [];
+
+        for(let type of Object.entries(types))
+        {
+            for(let op of type[1].availableOperations)
+            {
+                if(op == operation)
+                    available.push(type[0]);
+            }
+        }
     
-    switch(operation)
-    {
-        case 'add':
-            return ["Новини", "Контакти"];
-        case 'delete':
-            return ["Новини", "Контакти"];
-        case 'update':
-            return ["Новини", "Контакти", "За нас"];
-    }
+        return available
 }
 
 export function getHrefs(operation = undefined)
 {
     if(operation == undefined)
         operation = localStorage["operationType"];
-    
-    let regular = localStorage["operationType"] + ".html";
 
-    switch(operation)
-    {
-        case 'add':
-            return regular;
-        case 'delete': 
-            return regular;
-        case 'update':
-            return [regular, regular, "update-fill.html"];
-    }
+    const hrefs = [];
+
+    for (let type of Object.entries(types))
+        hrefs.push(type[1].href);
+    return hrefs;
 }

@@ -4,8 +4,11 @@ import { textInput, mdInput } from "../../templates/elements.js";
 
 const md = require("marked");
 
-export class News extends DataType
+export default class News extends DataType
 {
+    static availableOperations = ["add", "delete", "update"];
+    static titleProperty = "title";
+
     constructor()
     {
         const titles = ["Title", "Author", "Content"];

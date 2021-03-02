@@ -1,14 +1,13 @@
 import { SelectionMenu } from "./Navigation/MenuSystem/selection-menu.js";
-import { getAvailableTypes, getAvailableTitles, getHrefs } from "./DataTypes/mapper.js";
+import { getAvailableOperations, getHrefs } from "./DataTypes/mapper.js";
 
-const titles = getAvailableTitles();
-const values = getAvailableTypes();
+const titles = getAvailableOperations();
 
-console.log(titles);
-console.log(values);
+let types = [];
+for(let i in titles)
+    types.push("'" + titles[i].toLowerCase() + "'");
 
 const href = getHrefs();
-console.log(href);
 
-const menu = new SelectionMenu("insert-target", titles, href, "selection", values);
+const menu = new SelectionMenu("insert-target", titles, href, "selection", types);
 menu.render();

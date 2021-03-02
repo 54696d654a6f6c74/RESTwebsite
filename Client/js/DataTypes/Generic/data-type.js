@@ -1,5 +1,4 @@
 const Attribute = require("@54696d654a6f6c74/html-injector").Attribute;
-// Maybe move this here?
 const _ = require("lodash");
 
 export class DataType
@@ -7,6 +6,10 @@ export class DataType
     RESTroot;
     data;
     inputStrcture;
+    static href = localStorage["operationType"] + ".html";
+
+    static availableOperations;
+    static titleProperty;
 
     constructor(inputfieldTitles, inputfieldTypes)
     {

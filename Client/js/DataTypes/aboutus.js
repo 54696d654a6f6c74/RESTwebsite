@@ -4,8 +4,10 @@ import { mdInput } from "../../templates/elements.js";
 
 const md = require("marked");
 
-export class AboutUs extends DataType
+export default class AboutUs extends DataType
 {
+    static availableOperations = ["update"];
+    static href = "update-fill.html";
     constructor()
     {
         const titles = ["Content"];
@@ -22,7 +24,7 @@ export class AboutUs extends DataType
 
         const json = {
             md: {
-                contnet: inputData[0]
+                content: inputData[0]
             },
             aboutus: {
                 content: md(inputData[0])
@@ -40,7 +42,7 @@ export class AboutUs extends DataType
 
         let info = await httpGet(localStorage["operationTarget"] + "/" + "md")
 
-        retrived.push(info.contnet)
+        retrived.push(info.content)
 
         return retrived
     }

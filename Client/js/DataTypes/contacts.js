@@ -2,8 +2,11 @@ import { DataType } from "./Generic/data-type.js";
 import { httpGet } from "../../../Public/js/utils.js";
 import { textInput } from "../../templates/elements.js";
 
-export class Contacts extends DataType
+export default class Contacts extends DataType
 {
+    static availableOperations = ["add", "delete", "update"];
+    static titleProperty = "name";
+
     constructor()
     {
         const titles = ["Names", "Phone number"];
