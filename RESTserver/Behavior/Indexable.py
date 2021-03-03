@@ -7,6 +7,10 @@ from os.path import exists
 
 
 class Indexable:
+    """
+    Behavior for data that can be accessed
+    via enumerable indecies
+    """
     def __init__(self, path: str, files: []):
         self.path = path
         self.files = files

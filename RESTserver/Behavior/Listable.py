@@ -6,6 +6,10 @@ from os import listdir
 
 
 class Listable(Indexable):
+    """
+    Behavior for data that can be listed,
+    allowing for manipulations such as sorting.
+    """
     def __init__(self, path: str, files: [], header_file_name: str):
         super().__init__(path, files)
         self.header_file_name = header_file_name
