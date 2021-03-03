@@ -51,6 +51,10 @@ button#preview{
     font-weight: bold;
     margin: 0;
 }
+a.button#back-button:hover{
+    box-shadow: 2px 2px 5px #000000;
+    /*text-shadow: 0.5px 0.5px 1px #222831;*/
+}
 button:hover{
     background-color: #d65a31;
 }

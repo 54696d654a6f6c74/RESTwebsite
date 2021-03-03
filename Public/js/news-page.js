@@ -8,13 +8,23 @@ async function getNewsPart(part)
 
 function displayNewsHeader(header)
 {
-    document.getElementById("news-content").innerHTML += "<h2>" + header.title + "</h2>";
-    document.getElementById("news-content").innerHTML += "<h4>Автор: " + header.author + "</h4>";
+    document.getElementById("news-content").innerHTML += 
+    `
+    <div id="article-header">
+        <h2> ${header.title} </h2>
+        <h4>Автор: ${header.author} </h4>
+    </div>
+    `
 }
 
 function displayNewsContent(content)
 {
-    document.getElementById("news-content").innerHTML += "<p>" + content.fill + "</p>";    
+    document.getElementById("news-content").innerHTML += 
+    `
+    <div id="article-content">
+        <p> ${content.fill} </p>    
+    </div>
+    `
 }
 async function load(){
     await getNewsPart("header").then((header) => displayNewsHeader(header));

@@ -35,6 +35,7 @@ body{
 #main-page{
     display: flex;
     flex-flow: row;
+    min-height: 87vh;
 }
 
 /* --- */
