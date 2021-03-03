@@ -1,12 +1,18 @@
-from flask import Blueprint # , Response
+from flask import Blueprint
 
 from json import loads
+
+from os import mkdir
+from os.path import exists
 
 
 class Indexable:
     def __init__(self, path: str, files: []):
         self.path = path
         self.files = files
+
+        if not exists(path):
+            mkdir(path)
 
     def get_data_for_index(self, index: int) -> dict:
         data_dict = {}

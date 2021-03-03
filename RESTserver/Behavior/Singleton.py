@@ -2,11 +2,17 @@ from flask import request, Blueprint, Response
 
 from json import loads, dumps
 
+from os import mkdir
+from os.path import exists
+
 
 class Singleton():
     def __init__(self, path: str, file_name: str):
         self.path = path
         self.file_name = file_name
+
+        if not exists(path):
+            mkdir(path)
 
     def get_file_data(self, file):
         try:
