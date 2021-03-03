@@ -8,7 +8,7 @@ from os.path import exists
 
 class Singleton():
     """
-    Behavior for data that is unique. 
+    Behavior for data that is unique.
     Can only accept PUT and GET requests.
     """
     def __init__(self, path: str, file_name: str):
