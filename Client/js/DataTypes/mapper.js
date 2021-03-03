@@ -1,8 +1,13 @@
-// There has to be a better way of doing this...
 import types from "./linker.js";
 
+/**
+ * Maps the string representation of a
+ * data type into a type reference
+ */
 export function getDataType()
 {
+    // type[0] holds the name of the class
+    // type[1] holds a reference to the class
     for(let type of Object.entries(types))
     {
         if(type[0].toLowerCase()
@@ -12,33 +17,22 @@ export function getDataType()
     return undefined
 }
 
+/**
+ * Returns the title property of the
+ * selected data type
+ */
 export function getDataHeaderTitle()
 {
     const type = getDataType();
     return type.titleProperty;
 }
 
+/**
+ * Returns an array of string 
+ * representations of the available
+ * data types for the selected operation
+ */
 export function getAvailableTypes(operation = undefined)
-{
-    if(operation == undefined)
-        operation = localStorage["operationType"];
-
-    let available = [];
-
-    for(let type of Object.entries(types))
-    {
-        for(let op of type[1].availableOperations)
-        {
-            console.log(op);
-            if(op == operation)
-                available.push("'" + type[0].toLowerCase() + "'");
-        }
-    }
-
-    return available
-}
-
-export function getAvailableOperations(operation = undefined)
 {
     if(operation == undefined)
         operation = localStorage["operationType"];
@@ -57,6 +51,11 @@ export function getAvailableOperations(operation = undefined)
         return available
 }
 
+/**
+ * Returns an array of hrefs
+ * for each operation available
+ * for the selected operation
+ */
 export function getHrefs(operation = undefined)
 {
     if(operation == undefined)

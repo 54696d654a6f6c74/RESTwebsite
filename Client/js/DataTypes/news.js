@@ -3,6 +3,11 @@ import { httpGet } from "../../../Public/js/utils.js";
 import { textInput, mdInput } from "../../templates/elements.js";
 
 const md = require("marked");
+md.setOptions(
+    {
+        headerIds: false
+    }
+);
 
 export default class News extends DataType
 {
