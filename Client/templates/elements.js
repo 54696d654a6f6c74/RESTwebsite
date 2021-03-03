@@ -2,7 +2,7 @@ const { Tag, Attribute } = require("@54696d654a6f6c74/html-injector");
 
 export const navEle = 
 new Tag("a", [
-    new Tag("h2", "", [new Attribute("class", "news-main-item")])
+    new Tag("h2", "", [new Attribute("class", "main-item")])
 ], []);
 
 export const blankButton = 
@@ -23,13 +23,13 @@ export const mdInput =
 new Tag("h3", "", []),
 new Tag("textarea", "", [
     new Attribute ("name", "main-md"),
-    new Attribute ("class", "md-input"),
-    new Attribute ("rows", "20"),
+    new Attribute ("class", "md-input")
 ]),
 
 new Tag("iframe", "", [
     new Attribute ("class", "md-input"),
     new Attribute ("id", "md-preview"),
+    new Attribute ("resize", "none"),
     new Attribute ("style", "display: none;")
 ]),
 new Tag("div", [

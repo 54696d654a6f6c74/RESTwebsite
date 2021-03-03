@@ -13,6 +13,11 @@ a.button:hover{
     background-color: #d65a31;
 }
 
+a.button#back-button:hover{
+    box-shadow: 2px 2px 5px #000000;
+    /*text-shadow: 0.5px 0.5px 1px #222831;*/
+}
+
 a#forward-button.button{
     float: right;
 }
@@ -35,11 +40,12 @@ button#submit{
     font-size: 2em;
     position: fixed;
     top: 90%;
-    width: 70%;
+    width: 30%;
     height: fit-content;
     font-weight: bold;
     margin: 0;
     right: 0;
+    background-color: #393e46;
 }
 button#preview{
     font-size: 2em;
@@ -50,10 +56,7 @@ button#preview{
     height: fit-content;
     font-weight: bold;
     margin: 0;
-}
-a.button#back-button:hover{
-    box-shadow: 2px 2px 5px #000000;
-    /*text-shadow: 0.5px 0.5px 1px #222831;*/
+    background-color: #393e46;
 }
 button:hover{
     background-color: #d65a31;

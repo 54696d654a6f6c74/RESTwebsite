@@ -4,7 +4,7 @@ function writeNewsArticle(id, title)
 {
     document.getElementById("news-page-main").innerHTML += `
     <a onclick="selected(${id})" href="news-page.html">
-        <h2 class="news-main-item">${title}</h2>
+        <h2 class="main-item">${title}</h2>
     </a>`;
 }
 

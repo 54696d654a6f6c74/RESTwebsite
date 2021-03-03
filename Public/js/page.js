@@ -8,7 +8,7 @@ async function getPage()
 
 function displayPageContent(content)
 {
-    document.getElementById("news-content").innerHTML += 
+    document.getElementById("page-content").innerHTML += 
     `
     <div id="article-content">
         <p> ${content.content} </p>

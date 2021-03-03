@@ -5,7 +5,7 @@ export function get_element(text, href, onclick_name = undefined, onclick_value 
     const ele = 
     new Tag("a", [
         new Tag("h2", text, [
-            new Attribute("class", "news-main-item"),
+            new Attribute("class", "main-item"),
         ])
     ], [new Attribute("href", href)]);
 
