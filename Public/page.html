@@ -5,19 +5,24 @@
 
         <link rel="stylesheet" href="../css/style.css" />
 
-        <script defer type="module" src="./js/news.js"></script>
+        <script defer type="module" src="./js/page.js"></script>
     </head>
     <body>
+
         <nav class="hor-popout-span">
+
             <div class="hor-popout-container">
                 <a class="hor-popout-item" href="index.html">Лого</a>
             </div>
+
             <div class="hor-popout-container" style="float: right;">
                 <a class="hor-popout-item" href="news.html">Новини</a>
                 <a class="hor-popout-item" href="#">Галерия</a>
                 <a class="hor-popout-item" href="contacts.html">Контакти</a>
             </div>
+
         </nav>
+
         <div id="main-page">
             <div class="menu">
                 <a class="list-item" href="nojs.html">Дневник</a>
@@ -28,19 +33,15 @@
                 <a class="list-item" href="page.html" onclick="selectedPage(`documents`)">Документи</a>
                 <a class="list-item" href="page.html" onclick="selectedPage(`aboutus`)">За нас</a>
             </div>
-            <div class="article-wrapper" id="news-page-main">
+
+            <div class="article-wrapper" id="news-content">
 
             </div>
         </div>
-
         <script>
-        function selected(val){
-            localStorage["selectedNews"] = val;
-        }
-        function selectedPage(val){
-            localStorage["selectedPage"] = val;
-        }
+            function selectedPage(val){
+                localStorage["selectedPage"] = val;
+            }
         </script>
-
     </body>
-</html>
+</html

@@ -9,7 +9,7 @@ md.setOptions(
     }
 );
 
-export default class AboutUs extends DataType
+class StaticPage extends DataType
 {
     static availableOperations = ["update"];
     static href = "update-fill.html";
@@ -51,4 +51,28 @@ export default class AboutUs extends DataType
 
         return retrived
     }
+}
+
+export class Entry extends StaticPage
+{
+}
+
+export class FreePositions extends StaticPage
+{
+}
+
+export class Projects extends StaticPage
+{
+}
+
+export class Exams extends StaticPage
+{
+}
+
+export class Documents extends StaticPage
+{
+}
+
+export class AboutUs extends StaticPage
+{
 }
