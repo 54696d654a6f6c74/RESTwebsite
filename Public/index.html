@@ -24,14 +24,13 @@
         </nav>
         <div id="main-page">
             <div class="menu">
-                <a class="list-item" href="#">Дневник</a>
-                <a class="list-item" href="#">Прием</a>
-                <a class="list-item" href="#">Свободни места</a>
-                <a class="list-item" href="#">Програми и проекти</a>
-                <a class="list-item" href="#">ДЗИ</a>
-                <a class="list-item" href="#">Документи</a>
-                <a class="list-item" href="#">За нас</a>
-                <a class="list-item" href="#">Тествай да имаш прекалено дълго меню, толкова дълго че се простира на две часови зони</a>
+                <a class="list-item" href="nojs.html">Дневник</a>
+                <a class="list-item" href="page.html" onclick="selectedPage(`entry`)">Прием</a>
+                <a class="list-item" href="page.html" onclick="selectedPage(`freepositions`)">Свободни места</a>
+                <a class="list-item" href="page.html" onclick="selectedPage(`projects`)">Програми и проекти</a>
+                <a class="list-item" href="page.html" onclick="selectedPage(`exams`)">ДЗИ</a>
+                <a class="list-item" href="page.html" onclick="selectedPage(`documents`)">Документи</a>
+                <a class="list-item" href="page.html" onclick="selectedPage(`aboutus`)">За нас</a>
             </div>
             <div class="article-wrapper">
                 <article id="article-1">
@@ -48,5 +47,10 @@
                 <a class="hor-poput-item">GPLv3</a>
             </div>
         </footer>
+        <script>
+            function selectedPage(val){
+                localStorage["selectedPage"] = val;
+            }
+        </script>
     </body>
 </html>

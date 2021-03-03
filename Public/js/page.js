@@ -1,0 +1,21 @@
+import * as utils from './utils.js';
+
+async function getPage()
+{
+    // A validation step could be done before returning
+    return await utils.httpGet(localStorage["selectedPage"]);
+}
+
+function displayPageContent(content)
+{
+    document.getElementById("news-content").innerHTML += 
+    `
+    <div id="article-content">
+        <p> ${content.content} </p>
+    </div>
+    `
+}
+async function load(){
+    await getPage().then((content) => displayPageContent(content));
+}
+load();

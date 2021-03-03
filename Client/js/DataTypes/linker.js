@@ -1,10 +1,15 @@
 import News from "./news.js";
 import Contacts from "./contacts.js";
-import Aboutus from "./aboutus.js";
+import { AboutUs, Entry, Exams, Documents, FreePositions, Projects } from "./static-page.js";
 
 export default
 {
     News,
     Contacts,
-    Aboutus
+    Entry,
+    Exams,
+    Documents,
+    FreePositions,
+    Projects,
+    AboutUs
 }
