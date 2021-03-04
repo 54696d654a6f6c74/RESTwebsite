@@ -10,7 +10,6 @@
 /* Import all other styles */
 @import url("elements/nav.css");
 @import url("elements/menu.css");
-@import url("elements/news.css");
 @import url("elements/button.css");
 @import url("elements/textelem.css");
 @import url("components/list.css");

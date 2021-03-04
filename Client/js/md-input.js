@@ -1,53 +1,44 @@
 const md = require("marked");
 // handwritten vanilla js md wysiwyg editor because dependencies are not cool
 function insertModifier(action) {
-    var addTextArea = document.getElementById("md-input");
+    var addTextArea = document.getElementsByName("main-md")[0];
     var selectionText = addTextArea.value.substring(addTextArea.selectionStart, addTextArea.selectionEnd);
     var beginningToSelectionText = addTextArea.value.substring(0, addTextArea.selectionStart);
     var selectionTextToEnd = addTextArea.value.substring(addTextArea.selectionEnd);
 
     switch (action) {
         case 'bold':
-            addTextArea.value = beginningToSelectionText + "**" + selectionText + "**" + selectionTextToEnd;
+            addTextArea.value = InsertTextAtSelectionStart("**", addTextArea, true, true);
+            /*addTextArea.value = beginningToSelectionText + TextInsert("**", true, true, selectionText) + selectionTextToEnd;*/
+            /*addTextArea.value = beginningToSelectionText + "**" + selectionText + "**" + selectionTextToEnd;*/
         break;
 
         case 'italic':
-            addTextArea.value = beginningToSelectionText + "*" + selectionText + "*" + selectionTextToEnd;
+            addTextArea.value = InsertTextAtSelectionStart("*", addTextArea, true, true);
         break;
 
         case 'heading':
-            addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
-            + "\n# " + 
-                addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
+            addTextArea.value = InsertTextAtNewLine("\n# ", addTextArea, true, true);
         break;
 
         case 'codeBlock':
-            // override selectionText with line start and end
-            beginningToSelectionText = addTextArea.value.substring(0, 
-                addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart) + 1);
-            selectionText = addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", 
-                addTextArea.selectionStart) + 1, addTextArea.selectionEnd);
-            addTextArea.value = beginningToSelectionText + "```\n" + selectionText + "\n```" + selectionTextToEnd;
+            addTextArea.value = InsertTextAtSelectionStart("\n```\n", addTextArea, true, true);
+            /*addTextArea.value = beginningToSelectionText + TextInsert("\n```\n", true, true, selectionText) + selectionTextToEnd;*/
         break;
 
         case 'bulletList':
-            addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
-            + "\n* " + 
-                addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
+            addTextArea.value = InsertTextAtNewLine("\n* ", addTextArea, true, true);
         break;
 
         case 'numberList':
-            addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
-                + "\n?. " + 
-                addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
+            var cursor = addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 2;
+            addTextArea.value = InsertTextAtNewLine("\n?. ", addTextArea);
+            addTextArea.selectionEnd = cursor;
             addTextArea.focus();
-            addTextArea.selectionEnd = addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1;
         break;
 
         case 'quote':
-            addTextArea.value = addTextArea.value.substring(0, addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1))
-            + "\n> " + 
-                addTextArea.value.substring(addTextArea.value.lastIndexOf("\n", addTextArea.selectionStart - 1) + 1);
+            addTextArea.value = InsertTextAtNewLine("\n> ", addTextArea, true, true);
         break;
 
         case 'hyperlink':
@@ -74,4 +65,33 @@ function mdPreview(){
     var mdTextInput = document.getElementsByName("main-md")[0].value;
     document.getElementById("md-preview").contentWindow.document.write("<link rel=\"stylesheet\" href=\"../css/style.css\" />");
     document.getElementById("md-preview").contentWindow.document.write(md(mdTextInput));
+}
+
+function TextInsert(symbol, opening, closing, content)
+{
+
+    let output = "";
+    if (opening) output+= symbol;
+    output += content;
+    if (closing) output += symbol;
+    return output;
+}
+
+function GetTextBeforeNewLine(textArea){
+    // console.log(textArea.value.substring(0, textArea.value.lastIndexOf("\n", textArea.selectionStart)));
+    return textArea.value.substring(0, textArea.value.lastIndexOf("\n", textArea.selectionStart));
+}
+
+function GetTextAfterNewLine(textArea){
+    // console.log(textArea.value.substring(textArea.value.lastIndexOf("\n", textArea.selectionStart) + 1));
+    return textArea.value.substring(textArea.value.lastIndexOf("\n", textArea.selectionStart) + 1);
+}
+function InsertTextAtSelectionStart(symbol, textArea, opening, closing){
+    var beginningToSelectionText = textArea.value.substring(0, textArea.selectionStart);
+    var selectionTextToEnd = textArea.value.substring(textArea.selectionEnd);
+    var selectionText = textArea.value.substring(textArea.selectionStart, textArea.selectionEnd);
+    return beginningToSelectionText + TextInsert(symbol, opening, closing, selectionText) + selectionTextToEnd;
+}
+function InsertTextAtNewLine(symbol, textArea){
+    return GetTextBeforeNewLine(textArea) + symbol + GetTextAfterNewLine(textArea);    
 }
