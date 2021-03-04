@@ -3,34 +3,39 @@ import * as utils from './utils.js';
 async function load()
 {
     let data = await utils.httpGet("news/sorted");
-    let headers = data.headers; 
-    let indecies = data.indecies; // array
+    let indecies = data.indecies;
 
-    let header = await utils.httpGet("news/" + indecies.length + "/" + "header");
-    let content = await utils.httpGet("news/" + indecies.length + "/" + "content");
+    if(indecies.length > 0)
+    {
+        const header = await utils.httpGet("news/" + indecies[indecies.length-1] + "/" + "header");
+        const content = await utils.httpGet("news/" + indecies[indecies.length-1] + "/" + "content");
 
-    document.getElementById("article-1").innerHTML += 
-    `
-    <div id="article-header">
-        <h2> ${header.title} </h2>
-    </div>
-    <div id="article-content">
-        <p> ${content.fill} </p>
-    </div>
-    `
+        document.getElementById("article-1").innerHTML += 
+        `
+        <div id="article-header">
+            <h2> ${header.title} </h2>
+        </div>
+        <div id="article-content">
+            <p> ${content.fill} </p>
+        </div>
+        `
+    }
 
-    header = await utils.httpGet("news/" + (indecies.length - 1) + "/" + "header");
-    content = await utils.httpGet("news/" + (indecies.length - 1) + "/" + "content");
+    if(indecies.length > 1)
+    {
+        const header = await utils.httpGet("news/" + indecies[indecies.length-2] + "/" + "header");
+        const content = await utils.httpGet("news/" + indecies[indecies.length-2] + "/" + "content");
 
-    document.getElementById("article-2").innerHTML += 
-    `
-    <div id="article-header">
-        <h2> ${header.title} </h2>
-    </div>
-    <div id="article-content">
-        <p> ${content.fill} </p>
-    </div>
-    `
+        document.getElementById("article-2").innerHTML += 
+        `
+        <div id="article-header">
+            <h2> ${header.title} </h2>
+        </div>
+        <div id="article-content">
+            <p> ${content.fill} </p>
+        </div>
+        `
+    }
 }
 
 load();
