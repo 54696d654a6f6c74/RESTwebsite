@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, Response
 
 from json import loads
 
@@ -18,11 +18,14 @@ class Indexable:
         if not exists(path):
             mkdir(path)
 
-    def get_data_for_index(self, index: int) -> dict:
+    def get_data_for_index(self, index: int):
         data_dict = {}
 
         for file in self.files:
-            io_file = open(f"{self.path}/{str(index)}/{file}.json", "r")
+            try:
+                io_file = open(f"{self.path}/{str(index)}/{file}.json", "r")
+            except FileNotFoundError:
+                return Response(status = 404)
 
             data = loads(io_file.read())
 
@@ -32,8 +35,11 @@ class Indexable:
 
         return data_dict
 
-    def get_data_for_item(self, index: int, file_name: str) -> dict:
-        io_file = open(f"{self.path}/{str(index)}/{file_name}.json", "r")
+    def get_data_for_item(self, index: int, file_name: str):
+        try:
+            io_file = open(f"{self.path}/{str(index)}/{file_name}.json", "r")
+        except FileNotFoundError:
+            return Response(status = 404)
 
         data = loads(io_file.read())
 
