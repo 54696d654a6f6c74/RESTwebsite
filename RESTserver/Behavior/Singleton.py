@@ -35,7 +35,7 @@ class Singleton():
 
     def get_data(self):
         try:
-            data = self.get_file_data(self.file_name)
+            data = self.get_file_data("data")
         except FileNotFoundError:
             return Response(status = 404)
 
