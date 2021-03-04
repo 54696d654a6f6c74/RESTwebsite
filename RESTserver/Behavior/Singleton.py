@@ -11,9 +11,8 @@ class Singleton():
     Behavior for data that is unique.
     Can only accept PUT and GET requests.
     """
-    def __init__(self, path: str, file_name: str):
+    def __init__(self, path: str):
         self.path = path
-        self.file_name = file_name
 
         if not exists(path):
             mkdir(path)
@@ -59,8 +58,9 @@ class Singleton():
         writer.write(data_to_write)
         writer.close()
 
-    def update_file(self, file_name: str):
-        data = request.get_json()
+    def update_file(self, file_name: str, data: dict = None):
+        if data is None:
+            data = request.get_json()
 
         try:
             self.update(data, file_name)
@@ -72,8 +72,8 @@ class Singleton():
     def update_all_files(self):
         data = request.get_json()
 
-        self.update(data, self.file_name)
-        self.update(data, "md")
+        self.update_file("data", data)
+        self.update_file("md", data)
 
         return Response(status = 200)
 

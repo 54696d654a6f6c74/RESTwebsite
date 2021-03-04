@@ -26,27 +26,18 @@ views = [
     ),
     AboutView(
         "./data/entry",
-        "entry"
     ),
     AboutView(
         "./data/freepositions",
-        "freepositions"
     ),
     AboutView(
         "./data/projects",
-        "projects"
     ),
     AboutView(
         "./data/exams",
-        "exams"
-    ),
-    AboutView(
-        "./data/documents",
-        "documents"
     ),
     AboutView(
         "./data/aboutus",
-        "aboutus"
     )
 ]
 
@@ -57,7 +48,6 @@ names = [
     "freepositions",
     "projects",
     "exams",
-    "documents",
     "aboutus"
 ]
 

@@ -1,6 +1,6 @@
 import News from "./news.js";
 import Contacts from "./contacts.js";
-import { AboutUs, Entry, Exams, Documents, FreePositions, Projects } from "./static-page.js";
+import { AboutUs, Entry, Exams, FreePositions, Projects } from "./static-page.js";
 
 export default
 {
@@ -8,7 +8,6 @@ export default
     Contacts,
     Entry,
     Exams,
-    Documents,
     FreePositions,
     Projects,
     AboutUs

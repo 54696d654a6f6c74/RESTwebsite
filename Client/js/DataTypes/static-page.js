@@ -19,8 +19,6 @@ class StaticPage extends DataType
         const types = [mdInput];
 
         super(titles, types);
-        
-        this.RESTroot = "aboutus";
     }
 
     submit(reqType)
@@ -31,7 +29,7 @@ class StaticPage extends DataType
             md: {
                 content: inputData[0]
             },
-            aboutus: {
+            data: {
                 content: md(inputData[0])
             }
         }
@@ -55,24 +53,25 @@ class StaticPage extends DataType
 
 export class Entry extends StaticPage
 {
+    RESTroot = "entry";
 }
 
 export class FreePositions extends StaticPage
 {
+    RESTroot = "freepositions";
 }
 
 export class Projects extends StaticPage
 {
+    RESTroot = "projects";
 }
 
 export class Exams extends StaticPage
 {
-}
-
-export class Documents extends StaticPage
-{
+    RESTroot = "exams";
 }
 
 export class AboutUs extends StaticPage
 {
+    RESTroot = "aboutus";
 }
