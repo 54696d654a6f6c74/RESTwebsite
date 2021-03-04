@@ -40,7 +40,7 @@ button#submit{
     font-size: 2em;
     position: fixed;
     top: 90%;
-    width: 30%;
+    width: 300px;
     height: fit-content;
     font-weight: bold;
     margin: 0;
@@ -51,18 +51,20 @@ button#preview{
     font-size: 2em;
     position: fixed;
     top: 90%;
-    width: 30%;
+    width: 300px;
     left: 0;
     height: fit-content;
     font-weight: bold;
     margin: 0;
     background-color: #393e46;
 }
-button:hover{
+button#preview:hover, button#submit:hover, button:hover{
     background-color: #d65a31;
 }
 
 input.ribbon-button{
+    height: 2em;
+    width: 2.5em;
     border: 1px solid #eee;
     font-size: 1.25em;
     font-family: 'Times New Roman', Times, serif;
