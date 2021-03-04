@@ -16,7 +16,6 @@ function displayPageContent(content)
     `
 }
 async function load(){
-    const data = await getPage();
     await getPage().then((content) => displayPageContent(content));
 }
 load();
