@@ -45,11 +45,11 @@ class Listable(Indexable):
 
     def bind(self, bp: Blueprint):
         bp.add_url_rule("",
-            view_func = self.unsorted_data, # self.get_header_data(True),
+            view_func = self.unsorted_data,
             methods = ['GET']
         )
 
         bp.add_url_rule("/sorted",
-            view_func = self.sorted_data, # self.get_header_data(False),
+            view_func = self.sorted_data,
             methods = ['GET']
         )
