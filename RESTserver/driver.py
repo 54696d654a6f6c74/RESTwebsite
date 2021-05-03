@@ -13,16 +13,20 @@ app.config["DEBUG"] = True
 
 CORS(app)
 
+page_size = 1
+
 views = [
     NewsView(
         "./data/news",
         ["header", "content", "md"],
-        "header"
+        "header",
+        page_size
     ),
     ContactsView(
         "./data/contacts",
         ["details"],
-        "details"
+        "details",
+        page_size
     ),
     AboutView(
         "./data/entry",
