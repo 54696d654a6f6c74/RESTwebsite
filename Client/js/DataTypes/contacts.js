@@ -1,4 +1,4 @@
-import { DataType } from "./Generic/data-type.js";
+import DataType from "./Generic/data-type.js";
 import { httpGet } from "../../../Public/js/utils.js";
 import { textInput } from "../../templates/elements.js";
 

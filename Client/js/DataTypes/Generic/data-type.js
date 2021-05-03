@@ -1,10 +1,16 @@
 const Attribute = require("@54696d654a6f6c74/html-injector").Attribute;
 const _ = require("lodash");
 
+// This import is purely for documentation reasons
+// if a better way of doing this is discovered
+// remove this import ASAP
+const Tag = require("@54696d654a6f6c74/html-injector").Tag;
+
 /**
- * Base class for all data types
+ * @abstract
+ * @classdesc Base class for all data types
  */
-export class DataType
+export default class DataType
 {
     RESTroot;
     data;
@@ -26,8 +32,12 @@ export class DataType
     }
 
     /**
-     * Returns the input fields as array of
-     * objects that can be injected using html-injector
+     * The input fields as array of injectable
+     * objects associated with this this DataType
+     * 
+     * @public @method
+     * @param {string} request
+     * @returns {[Tag | {}]} the inputs associated with this DataType
      */
     generateInputs(request)
     {
@@ -46,6 +56,7 @@ export class DataType
             generated_inputs.push(input);
         }
 
+        // Ensures the onClick will call the submit fucntion
         window.onload = () => {
             document.getElementById("submit").addEventListener("click", () => this.submit(request));
         };
@@ -56,6 +67,8 @@ export class DataType
     /**
      * The function attatched to the submit button
      * on the input page for this data type
+     * 
+     * @protected @abstract @method
      */
     submit()
     {
@@ -65,6 +78,8 @@ export class DataType
     /**
      * Sends a GET request to the REST server
      * and returns the response
+     * 
+     * @protected @abstract @async @method
      */
     async getDataFromServer()
     {
@@ -72,8 +87,10 @@ export class DataType
     }
 
     /**
-     * Retrives data from the server and writes
-     * it into the input fields for this type
+     * Retrives data from the REST server and writes
+     * it into the input fields of this DataType
+     * 
+     * @protected @async @method
      */
     async writeServerData()
     {

@@ -1,5 +1,9 @@
 const injector = require("@54696d654a6f6c74/html-injector").Injector;
 
+/**
+ * @abstract
+ * @classdesc Base class for all Input types
+ */
 export class Input
 {
     constructor(tags)

@@ -1,36 +1,47 @@
 import types from "./linker.js";
 
+// This import is here just fo documentation
+// purposes, if there's a better way to do
+// this, remove it ASAP!
+import "./Generic/data-type.js";
+
 /**
  * Maps the string representation of a
- * data type into a type reference
+ * DataType into a type reference
+ * 
+ * @param {string} typeName
+ * @returns {DataType} Type reference to a DataType
  */
-export function getDataType()
+export function getDataType(typeName = localStorage["operationTarget"])
 {
     // type[0] holds the name of the class
     // type[1] holds a reference to the class
     for(let type of Object.entries(types))
     {
         if(type[0].toLowerCase()
-            == localStorage["operationTarget"])
+            == typeName)
             return type[1];
     }
     return undefined
 }
 
 /**
- * Returns the title property of the
- * selected data type
+ * Gets the title string for a slected DataType
+ * 
+ * @param {string} typeName
+ * @returns {string} Title propery of type with typeName
  */
-export function getDataHeaderTitle()
+export function getDataHeaderTitle(typeName = localStorage["operationTarget"])
 {
-    const type = getDataType();
+    const type = getDataType(typeName);
     return type.titleProperty;
 }
 
 /**
- * Returns an array of string 
- * representations of the available
- * data types for the selected operation
+ * Available DataTypes based on selected operation
+ * 
+ * @param {string} operation
+ * @returns {[string]} String representations to available DataTypes
  */
 export function getAvailableTypes(operation = undefined)
 {
@@ -52,9 +63,10 @@ export function getAvailableTypes(operation = undefined)
 }
 
 /**
- * Returns an array of hrefs
- * for each operation available
- * for the selected operation
+ * Hrefs to available pages based on selected operation
+ * 
+ * @param {string} operation
+ * @returns {[]} hrefs to available pages
  */
 export function getHrefs(operation = undefined)
 {

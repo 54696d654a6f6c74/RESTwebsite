@@ -1,3 +1,7 @@
+/**
+ * @abstract
+ * @classdesc Base class for all Menu types
+ */
 export class Menu
 {
     constructor(inputs, render_target)
