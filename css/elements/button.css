@@ -73,3 +73,8 @@ input.ribbon-button{
     background: none;
     color: #eee;
 }
+
+button.selected{
+    font-weight: bolder;
+    pointer-events: none;
+}

@@ -12,4 +12,5 @@ for(let i in titles)
 const href = getHrefs();
 
 const menu = new SelectionMenu("insert-target", titles, href, "selection", types);
+localStorage["page"] = 1;
 menu.render();

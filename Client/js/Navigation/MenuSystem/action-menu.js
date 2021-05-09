@@ -21,7 +21,7 @@ export class ActionMenu extends SelectionMenu
         let curPage = localStorage["page"] ?? 1;
         let data = await httpGet(localStorage["operationTarget"] + "/sorted?page=" + curPage);
         let pageCount = await httpGet(localStorage["operationTarget"] + "/pages");
-        let pager = new Pager(pageCount.pages, "any");
+        let pager = new Pager(pageCount.pages, "any", curPage);
 
         const headers = process_data_into_header(data);
         const title_name = getDataHeaderTitle();

@@ -3,7 +3,7 @@ import * as utils from './utils.js';
 async function getContacts()
 {
     // A validation step could be done before returning
-    return await utils.httpGet("contacts");
+    return await utils.httpGet("contacts?all=true");
 }
 
 function displayContacts(contacts)

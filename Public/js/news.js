@@ -10,7 +10,7 @@ function writeNewsArticle(id, title)
 
 async function load()
 {
-    let data = await utils.httpGet("news/sorted");
+    let data = await utils.httpGet("news?all=true");
     let headers = data.headers;
     let indecies = data.indecies;
 
