@@ -18,6 +18,9 @@ class Pageable(Listable):
     def get_all_data(self, sort_data: bool) -> []:
         data = super().get_all_data(sort_data)
 
+        if request.args.get('all', False, bool) is True:
+            return data
+
         page = request.args.get('page', 1, int)
 
         try:
